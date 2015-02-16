@@ -1,7 +1,7 @@
 package no.tobkje.aagame.gameobjects;
 
-import no.tobkje.aagame.Batch;
 import no.tobkje.aagame.assets.Assets;
+import no.tobkje.aagame.batch.Batch;
 
 public class Dummy extends AbstractGameObject {
 	public static final float WIDTH = 64, HEIGHT = 64;

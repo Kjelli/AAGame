@@ -1,6 +1,6 @@
 package no.tobkje.aagame.screens;
 
-import no.tobkje.aagame.Batch;
+import no.tobkje.aagame.batch.Batch;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.Dummy;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
