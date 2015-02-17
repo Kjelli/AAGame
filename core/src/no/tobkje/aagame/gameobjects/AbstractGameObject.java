@@ -67,7 +67,6 @@ public abstract class AbstractGameObject implements GameObject {
 
 	@Override
 	public void move(float delta) {
-		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
 		// TODO handle collisons?
 	}
