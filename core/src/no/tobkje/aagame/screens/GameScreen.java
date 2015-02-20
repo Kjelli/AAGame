@@ -6,6 +6,7 @@ import no.tobkje.aagame.batch.Batch;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.GroundFiller;
+import no.tobkje.aagame.gameobjects.Man;
 import no.tobkje.aagame.gameobjects.Sky;
 
 import com.badlogic.gdx.Gdx;
@@ -17,6 +18,10 @@ public class GameScreen implements Screen {
 	private static float levelVelocity = LEVEL_VELOCITY_INITIAL;
 
 	ArrayList<GameObject> objects;
+	
+	
+	public GameScreen () {
+	}
 
 	@Override
 	public void show() {
@@ -26,6 +31,7 @@ public class GameScreen implements Screen {
 			objects.add(new Ground(Ground.WIDTH * i, 30));
 		}
 		objects.add(new GroundFiller(30));
+		objects.add(new Man(60, 95));
 	}
 
 	@Override
@@ -75,6 +81,5 @@ public class GameScreen implements Screen {
 
 	public static float getLevelVelocity() {
 		return levelVelocity;
-	}
-
+	}	
 }
