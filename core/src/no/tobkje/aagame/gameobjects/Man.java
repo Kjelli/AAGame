@@ -11,8 +11,7 @@ public class Man extends AbstractGameObject {
 
 	public Man(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
-		
-		
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,11 +25,7 @@ public class Man extends AbstractGameObject {
 	@Override
 	public void update(float delta) {
 		runTime += delta;
-		position.add(velocity.cpy().scl(delta));
-		
-		velocity.add(acceleration.cpy().scl(delta));
-		// TODO Auto-generated method stub
-
+		move(delta);
 	}
 
 	public void onClick() {
@@ -40,7 +35,7 @@ public class Man extends AbstractGameObject {
 	@Override
 	public void draw() {
 		Batch.getBatch().draw(Assets.mAnimation.getKeyFrame(runTime),
-				position.x, position.y, WIDTH, HEIGHT);
+				Math.round(position.x), Math.round(position.y), WIDTH, HEIGHT);
 		// TODO Auto-generated method stub
 
 	}

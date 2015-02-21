@@ -25,7 +25,7 @@ public class Ground extends AbstractGameObject {
 		position.add(velocity.cpy().scl(delta));
 
 		if (position.x + width < 0) {
-			position.x += 540 + width;
+			position.x += GameScreen.RESOLUTION.x + width;
 			tx = determineTexture();
 		}
 
@@ -34,7 +34,8 @@ public class Ground extends AbstractGameObject {
 
 	@Override
 	public void draw() {
-		Batch.getBatch().draw(tx, position.x, position.y, WIDTH, HEIGHT);
+		Batch.getBatch().draw(tx, Math.round(position.x),
+				Math.round(position.y), WIDTH, HEIGHT);
 	}
 
 }

@@ -28,7 +28,7 @@ public class Assets {
 		manEnd = new TextureRegion(manSheet, 330, 0, 121, 160);
 		
 		TextureRegion[] men = {manStart, manMiddle, manEnd};
-		mAnimation = new Animation (0.25f, men);
+		mAnimation = new Animation (0.15f, men);
 		mAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 	}
 

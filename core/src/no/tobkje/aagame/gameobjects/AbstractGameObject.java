@@ -1,5 +1,6 @@
 package no.tobkje.aagame.gameobjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractGameObject implements GameObject {
@@ -20,27 +21,27 @@ public abstract class AbstractGameObject implements GameObject {
 	}
 
 	@Override
-	public Vector2 getPosition() {
+	public final Vector2 getPosition() {
 		return position;
 	}
 
 	@Override
-	public Vector2 getVelocity() {
+	public final Vector2 getVelocity() {
 		return velocity;
 	}
 
 	@Override
-	public Vector2 getAcceleration() {
+	public final Vector2 getAcceleration() {
 		return acceleration;
 	}
 
 	@Override
-	public float getWidth() {
+	public final float getWidth() {
 		return width;
 	}
 
 	@Override
-	public float getHeight() {
+	public final float getHeight() {
 		return height;
 	}
 
@@ -59,16 +60,30 @@ public abstract class AbstractGameObject implements GameObject {
 		return false;
 	}
 
+	/*
+	 * Since OpenGL actually has the lower left corner as 0,0, and the
+	 * gdx.input.InputProcessor uses upper left as 0,0 we flip the given y with
+	 * respect to the height of the display
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see no.tobkje.aagame.gameobjects.GameObject#contains(float, float)
+	 */
 	@Override
-	public boolean contains(float x, float y) {
-		return (x >= position.x && x <= position.x + width && y >= position.y && y <= position.y
-				+ height);
+	public final boolean contains(float x, float y) {
+		return (x >= position.x && x <= position.x + width
+				&& Gdx.graphics.getHeight() - y >= position.y && Gdx.graphics
+				.getHeight() - y <= position.y + height);
 	}
 
 	@Override
+	public abstract void update(float delta);
+
+	@Override
 	public void move(float delta) {
+		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
-		// TODO handle collisons?
+
 	}
 
 	@Override
