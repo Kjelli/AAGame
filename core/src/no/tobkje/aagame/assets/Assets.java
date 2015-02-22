@@ -5,12 +5,20 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
+
+	/**
+	 * TextureRegion (0, 0) starts in TOP LEFT corner of the .png file.
+	 */
+
 	public static Texture spritesheet;
 	public static TextureRegion groundTop, groundTop2, groundFiller, sky;
 
 	public static Texture manSheet;
 	public static Animation mAnimation;
 	public static TextureRegion manStart, manMiddle, manEnd;
+
+	public static Texture sawSheet;
+	public static TextureRegion halfSaw, saw;
 
 	public static void load() {
 		loadBackground();
@@ -34,6 +42,11 @@ public class Assets {
 		TextureRegion[] men = { manStart, manMiddle, manEnd };
 		mAnimation = new Animation(0.15f, men);
 		mAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+		sawSheet = new Texture("saw.png");
+		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
+		halfSaw.flip(false, true);
+		saw = loadAndFlip(sawSheet, 0, 0, 400, 400);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -46,5 +59,6 @@ public class Assets {
 	public static void dispose() {
 		spritesheet.dispose();
 		manSheet.dispose();
+		sawSheet.dispose();
 	}
 }
