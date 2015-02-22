@@ -36,8 +36,6 @@ public class Man extends AbstractGameObject {
 		runTime += delta;
 		CollisionTest.simple(this, mcl);
 		move(delta);
-
-		System.out.println(onGround);
 	}
 
 	public void jump() {
