@@ -1,8 +1,9 @@
 package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.batch.Batch;
-import no.tobkje.aagame.screens.GameScreen;
+import no.tobkje.aagame.screens.PlayScreen;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HalfSaw extends AbstractGameObject {
 
@@ -16,13 +17,13 @@ public class HalfSaw extends AbstractGameObject {
 	@Override
 	public void update(float delta) {
 		move(delta);
-		velocity.x = -GameScreen.getLevelVelocity();
+		getVelocity().x = -PlayScreen.getLevelVelocity();
 
 	}
 
 	@Override
-	public void draw() {
-		Batch.getBatch().draw(Assets.halfSaw, Math.round(getPosition().x),
+	public void draw(SpriteBatch batch) {
+		batch.draw(Assets.halfSaw, Math.round(getPosition().x),
 				Math.round(getPosition().y), WIDTH, HEIGHT);
 	}
 

@@ -1,8 +1,9 @@
 package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.batch.Batch;
-import no.tobkje.aagame.screens.GameScreen;
+import no.tobkje.aagame.screens.PlayScreen;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Saw extends AbstractGameObject {
 
@@ -10,7 +11,7 @@ public class Saw extends AbstractGameObject {
 
 	public Saw(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
-		velocity.y = -200;
+		getVelocity().y = -200;
 	}
 
 	@Override
@@ -20,12 +21,12 @@ public class Saw extends AbstractGameObject {
 	}
 
 	public void fallingSaw() {
-		velocity.x = -GameScreen.getLevelVelocity();
+		getVelocity().x = -PlayScreen.getLevelVelocity();
 	}
 
 	@Override
-	public void draw() {
-		Batch.getBatch().draw(Assets.saw, Math.round(getPosition().x),
+	public void draw(SpriteBatch batch) {
+		batch.draw(Assets.saw, Math.round(getPosition().x),
 				Math.round(getPosition().y), WIDTH, HEIGHT);
 	}
 

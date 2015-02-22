@@ -2,6 +2,7 @@ package no.tobkje.aagame.screens;
 
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.GroundFiller;
+import no.tobkje.aagame.gameobjects.HalfSaw;
 import no.tobkje.aagame.gameobjects.Man;
 import no.tobkje.aagame.gameobjects.Sky;
 import no.tobkje.aagame.input.ManInput;
@@ -35,7 +36,7 @@ public class PlayScreen extends AbstractGameScreen {
 		for (int i = 0; i <= 10; i++) {
 			spawn(new Ground(Ground.WIDTH * i, 30));
 		}
-
+		spawn(new HalfSaw(400, 30 + Ground.HEIGHT));
 		spawn(new GroundFiller(30));
 		spawn(theMan);
 	}
