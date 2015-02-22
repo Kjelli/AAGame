@@ -61,9 +61,9 @@ public abstract class AbstractGameObject implements GameObject {
 	}
 
 	/*
-	 * Since OpenGL actually has the lower left corner as 0,0, and the
-	 * gdx.input.InputProcessor uses upper left as 0,0 we flip the given y with
-	 * respect to the height of the display
+	 * Since OpenGL actually has the lower left corner as 0,0, and the gdx uses
+	 * upper left as 0,0 we flip the given y with respect to the height of the
+	 * display
 	 * 
 	 * (non-Javadoc)
 	 * 

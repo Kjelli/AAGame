@@ -4,6 +4,7 @@ import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.batch.Batch;
 import no.tobkje.aagame.screens.GameScreen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ground extends AbstractGameObject {
@@ -25,7 +26,7 @@ public class Ground extends AbstractGameObject {
 		position.add(velocity.cpy().scl(delta));
 
 		if (position.x + width < 0) {
-			position.x += GameScreen.RESOLUTION.x + width;
+			position.x += Gdx.graphics.getWidth() + width;
 			tx = determineTexture();
 		}
 
