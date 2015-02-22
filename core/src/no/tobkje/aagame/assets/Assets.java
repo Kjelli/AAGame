@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
+
+	/**
+	 * TextureRegion (0, 0) starts in TOP LEFT corner of the .png file.
+	 */
+
 	public static Texture spritesheet;
 	public static TextureRegion groundTop, groundTop2, groundFiller, sky;
 
