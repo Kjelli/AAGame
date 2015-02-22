@@ -1,14 +1,14 @@
 package no.tobkje.aagame.gameobjects;
 
-import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.assets.Assets;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sky extends AbstractGameObject {
 
 	public Sky() {
-		super(0, 0, AAGame.GAME_WIDTH, AAGame.GAME_HEIGHT);
+		super(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override

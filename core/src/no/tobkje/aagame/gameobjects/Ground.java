@@ -23,7 +23,6 @@ public class Ground extends AbstractGameObject {
 
 	@Override
 	public void update(float delta) {
-		getPosition().add(getVelocity().cpy().scl(delta));
 
 		if (getPosition().x + getWidth() < 0) {
 			getPosition().x += Gdx.graphics.getWidth() + getWidth();
@@ -31,6 +30,8 @@ public class Ground extends AbstractGameObject {
 		}
 
 		getVelocity().x = -PlayScreen.getLevelVelocity();
+
+		move(delta);
 	}
 
 	@Override

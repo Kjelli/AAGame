@@ -1,9 +1,10 @@
 package no.tobkje.aagame.gameobjects;
 
+import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.GameScreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,7 +12,7 @@ public abstract class AbstractGameObject implements GameObject {
 	private final Vector2 position;
 	private final Vector2 velocity;
 	private final Vector2 acceleration;
-	private Rectangle hitbox;
+	private Hitbox hitbox;
 
 	private float width;
 	private float height;
@@ -25,7 +26,7 @@ public abstract class AbstractGameObject implements GameObject {
 		this.width = width;
 		this.height = height;
 
-		hitbox = new Rectangle(x, y, width, height);
+		hitbox = new Hitbox(x, y, width, height);
 	}
 
 	@Override
@@ -68,8 +69,12 @@ public abstract class AbstractGameObject implements GameObject {
 		return this.getHitbox().overlaps(other.getHitbox());
 	}
 
-	public Rectangle getHitbox() {
+	public Hitbox getHitbox() {
 		return hitbox;
+	}
+
+	public void setHitbox(Hitbox hitbox) {
+		this.hitbox = hitbox;
 	}
 
 	/*
@@ -95,9 +100,8 @@ public abstract class AbstractGameObject implements GameObject {
 	public void move(float delta) {
 		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
+		hitbox.update(position);
 
-		hitbox.x = position.x;
-		hitbox.y = position.y;
 	}
 
 	@Override
@@ -114,6 +118,12 @@ public abstract class AbstractGameObject implements GameObject {
 	public void destroy() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void drawDebug(ShapeRenderer sr) {
+		Rectangle r = getHitbox().toRectangle();
+		sr.rect(r.x, r.y, r.width, r.height);
 	}
 
 }

@@ -1,9 +1,10 @@
 package no.tobkje.aagame.gameobjects;
 
+import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.GameScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public interface GameObject {
@@ -62,9 +63,9 @@ public interface GameObject {
 	/**
 	 * Retrieve the bounds (hitbox) of the GameObject
 	 * 
-	 * @return The rectangle object representing the GameObject's hitbox
+	 * @return The Hitbox object representing the GameObject's hitbox
 	 */
-	public Rectangle getHitbox();
+	public Hitbox getHitbox();
 
 	/**
 	 * Check for collision with another GameObject
@@ -106,9 +107,20 @@ public interface GameObject {
 
 	/**
 	 * Draw the GameObject using arbitrary assets
-	 * @param batch - The SpriteBatch responsible for drawing the GameObject
+	 * 
+	 * @param batch
+	 *            - The SpriteBatch responsible for drawing the GameObject
 	 */
 	public void draw(SpriteBatch batch);
+
+	/**
+	 * Draw the hitbox of the object
+	 * 
+	 * @param sr
+	 *            - ShapeRenderer object used to draw debug-sensitive
+	 *            information
+	 */
+	public void drawDebug(ShapeRenderer sr);
 
 	/**
 	 * Destroy the object TODO: game-logic dependent stuff?

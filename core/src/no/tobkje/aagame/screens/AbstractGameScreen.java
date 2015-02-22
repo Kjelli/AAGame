@@ -3,17 +3,20 @@ package no.tobkje.aagame.screens;
 import java.util.ArrayList;
 
 import no.tobkje.aagame.gameobjects.GameObject;
+import no.tobkje.aagame.settings.Settings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractGameScreen implements GameScreen {
 
 	private final ArrayList<GameObject> objects;
 	private final OrthographicCamera camera;
 	private final SpriteBatch batch;
+	ShapeRenderer sr;
 
 	public AbstractGameScreen() {
 		objects = new ArrayList<GameObject>();
@@ -21,6 +24,8 @@ public abstract class AbstractGameScreen implements GameScreen {
 		camera.setToOrtho(false, Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
+		sr = new ShapeRenderer();
+		sr.setAutoShapeType(true);
 	}
 
 	@Override
@@ -31,8 +36,21 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	@Override
 	public final void render(float delta) {
+		if (Settings.get("slow", false))
+			delta *= 0.1f;
 		updateObjects(delta);
 		draw(batch);
+		if (Settings.get("debug", false)) {
+			drawDebug(sr);
+		}
+	}
+
+	private void drawDebug(ShapeRenderer sr) {
+		sr.begin();
+		for (GameObject o : objects) {
+			o.drawDebug(sr);
+		}
+		sr.end();
 	}
 
 	private void draw(SpriteBatch batch) {

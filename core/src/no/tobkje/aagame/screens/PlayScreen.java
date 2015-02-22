@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class PlayScreen extends AbstractGameScreen {
 
-	public static final float LEVEL_VELOCITY_INITIAL = 65.0f;
+	public static final float LEVEL_VELOCITY_INITIAL = 105.0f;
 	private static float levelVelocity = LEVEL_VELOCITY_INITIAL;
 
 	Man theMan;
@@ -37,6 +37,8 @@ public class PlayScreen extends AbstractGameScreen {
 			spawn(new Ground(Ground.WIDTH * i, 30));
 		}
 		spawn(new HalfSaw(400, 30 + Ground.HEIGHT));
+		spawn(new HalfSaw(520, 30 + Ground.HEIGHT));
+		spawn(new HalfSaw(640, 30 + Ground.HEIGHT));
 		spawn(new GroundFiller(30));
 		spawn(theMan);
 	}
@@ -52,5 +54,9 @@ public class PlayScreen extends AbstractGameScreen {
 
 	public static float getLevelVelocity() {
 		return levelVelocity;
+	}
+
+	public static void setLevelVelocity(float f) {
+		levelVelocity = f;
 	}
 }
