@@ -51,11 +51,8 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (theMan.contains(screenX, screenY) && button == Input.Buttons.LEFT) {
-			theMan.jump();
-			return true;
-		}
-		return false;
+		theMan.jump();
+		return true;
 	}
 
 	@Override
