@@ -2,6 +2,7 @@ package no.tobkje.aagame.screens;
 
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.GroundFiller;
+import no.tobkje.aagame.gameobjects.HalfSaw;
 import no.tobkje.aagame.gameobjects.Man;
 import no.tobkje.aagame.gameobjects.Sky;
 import no.tobkje.aagame.input.ManInput;
@@ -37,6 +38,8 @@ public class GameScreen extends AbstractGameScreen {
 		}
 
 		objects.add(new GroundFiller(30));
+		//objects.add(new Saw(400, 300));
+		objects.add(new HalfSaw(400, 90));
 		objects.add(theMan);
 	}
 

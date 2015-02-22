@@ -5,23 +5,19 @@ import no.tobkje.aagame.batch.Batch;
 
 public class Man extends AbstractGameObject {
 
+	// Height and Width of Man, specified.
 	public static final float WIDTH = 47, HEIGHT = 64;
-
+	
+	/**
+	 * The runTime variable keeps track of what MAN to render at what time.
+	 * Is incremented with delta, in the update method.
+	 */
 	private float runTime = 0;
 
 	public Man(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
-
-		// TODO Auto-generated constructor stub
 	}
 
-	/*
-	 * The meaning of runTime is to keep track of what MAN to render at what
-	 * time, to draw the correct animation. Not sure if correct
-	 * placement.(non-Javadoc)
-	 * 
-	 * @see no.tobkje.aagame.gameobjects.GameObject#update(float)
-	 */
 	@Override
 	public void update(float delta) {
 		runTime += delta;
@@ -35,9 +31,7 @@ public class Man extends AbstractGameObject {
 	@Override
 	public void draw() {
 		Batch.getBatch().draw(Assets.mAnimation.getKeyFrame(runTime),
-				Math.round(position.x), Math.round(position.y), WIDTH, HEIGHT);
-		// TODO Auto-generated method stub
-
+				Math.round(getPosition().x), Math.round(getPosition().y), WIDTH, HEIGHT);
 	}
 
 }

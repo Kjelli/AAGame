@@ -12,6 +12,9 @@ public class Assets {
 	public static Animation mAnimation;
 	public static TextureRegion manStart, manMiddle, manEnd;
 
+	public static Texture sawSheet;
+	public static TextureRegion halfSaw, saw;
+
 	public static void load() {
 		loadBackground();
 		loadGameObjects();
@@ -26,7 +29,6 @@ public class Assets {
 	}
 
 	private static void loadGameObjects() {
-		// Tryna make man appear / run (Y)
 		manSheet = new Texture("rock-running-3.png");
 		manStart = loadAndFlip(manSheet, 14, 0, 121, 160);
 		manMiddle = loadAndFlip(manSheet, 185, 0, 121, 160);
@@ -35,6 +37,11 @@ public class Assets {
 		TextureRegion[] men = { manStart, manMiddle, manEnd };
 		mAnimation = new Animation(0.15f, men);
 		mAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+		sawSheet = new Texture("saw.png");
+		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
+		halfSaw.flip(false, true);
+		saw = loadAndFlip(sawSheet, 0, 0, 400, 400);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -47,5 +54,6 @@ public class Assets {
 	public static void dispose() {
 		spritesheet.dispose();
 		manSheet.dispose();
+		sawSheet.dispose();
 	}
 }
