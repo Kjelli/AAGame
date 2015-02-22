@@ -26,7 +26,6 @@ public class Assets {
 	}
 
 	private static void loadGameObjects() {
-		// Tryna make man appear / run (Y)
 		manSheet = new Texture("rock-running-3.png");
 		manStart = loadAndFlip(manSheet, 14, 0, 121, 160);
 		manMiddle = loadAndFlip(manSheet, 185, 0, 121, 160);

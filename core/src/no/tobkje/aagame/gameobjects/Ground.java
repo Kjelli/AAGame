@@ -1,10 +1,10 @@
 package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.batch.Batch;
-import no.tobkje.aagame.screens.GameScreen;
+import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ground extends AbstractGameObject {
@@ -23,20 +23,20 @@ public class Ground extends AbstractGameObject {
 
 	@Override
 	public void update(float delta) {
-		position.add(velocity.cpy().scl(delta));
+		getPosition().add(getVelocity().cpy().scl(delta));
 
-		if (position.x + width < 0) {
-			position.x += Gdx.graphics.getWidth() + width;
+		if (getPosition().x + getWidth() < 0) {
+			getPosition().x += Gdx.graphics.getWidth() + getWidth();
 			tx = determineTexture();
 		}
 
-		velocity.x = -GameScreen.getLevelVelocity();
+		getVelocity().x = -PlayScreen.getLevelVelocity();
 	}
 
 	@Override
-	public void draw() {
-		Batch.getBatch().draw(tx, Math.round(position.x),
-				Math.round(position.y), WIDTH, HEIGHT);
+	public void draw(SpriteBatch batch) {
+		batch.draw(tx, Math.round(getPosition().x),
+				Math.round(getPosition().y), WIDTH, HEIGHT);
 	}
 
 }

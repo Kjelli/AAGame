@@ -1,15 +1,21 @@
 package no.tobkje.aagame.gameobjects;
 
+import no.tobkje.aagame.screens.GameScreen;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractGameObject implements GameObject {
-	protected final Vector2 position;
-	protected final Vector2 velocity;
-	protected final Vector2 acceleration;
+	private final Vector2 position;
+	private final Vector2 velocity;
+	private final Vector2 acceleration;
+	private Rectangle hitbox;
 
-	protected float width;
-	protected float height;
+	private float width;
+	private float height;
+	private GameScreen parentScreen;
 
 	public AbstractGameObject(float x, float y, float width, float height) {
 		position = new Vector2(x, y);
@@ -18,6 +24,8 @@ public abstract class AbstractGameObject implements GameObject {
 
 		this.width = width;
 		this.height = height;
+
+		hitbox = new Rectangle(x, y, width, height);
 	}
 
 	@Override
@@ -57,7 +65,11 @@ public abstract class AbstractGameObject implements GameObject {
 
 	@Override
 	public boolean intersects(GameObject other) {
-		return false;
+		return this.getHitbox().overlaps(other.getHitbox());
+	}
+
+	public Rectangle getHitbox() {
+		return hitbox;
 	}
 
 	/*
@@ -84,6 +96,18 @@ public abstract class AbstractGameObject implements GameObject {
 		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
 
+		hitbox.x = position.x;
+		hitbox.y = position.y;
+	}
+
+	@Override
+	public GameScreen getParentScreen() {
+		return parentScreen;
+	}
+
+	@Override
+	public void setParentScreen(GameScreen gameScreen) {
+		this.parentScreen = gameScreen;
 	}
 
 	@Override

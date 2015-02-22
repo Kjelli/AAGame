@@ -1,13 +1,14 @@
 package no.tobkje.aagame.gameobjects;
 
-import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.batch.Batch;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GroundFiller extends AbstractGameObject {
 
 	public GroundFiller(float y) {
-		super(0, 0, AAGame.GAME_WIDTH, y);
+		super(0, 0, Gdx.graphics.getWidth(), y);
 	}
 
 	@Override
@@ -17,8 +18,9 @@ public class GroundFiller extends AbstractGameObject {
 	}
 
 	@Override
-	public void draw() {
-		Batch.getBatch().draw(Assets.groundFiller, position.x, position.y, width, height);
+	public void draw(SpriteBatch batch) {
+		batch.draw(Assets.groundFiller, getPosition().x, getPosition().y,
+				getWidth(), getHeight());
 
 	}
 }

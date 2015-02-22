@@ -2,24 +2,25 @@ package no.tobkje.aagame.screens;
 
 import java.util.ArrayList;
 
-import no.tobkje.aagame.batch.Batch;
 import no.tobkje.aagame.gameobjects.GameObject;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public abstract class AbstractGameScreen implements Screen {
+public abstract class AbstractGameScreen implements GameScreen {
 
-	protected final ArrayList<GameObject> objects;
-	protected final OrthographicCamera camera;
+	private final ArrayList<GameObject> objects;
+	private final OrthographicCamera camera;
+	private final SpriteBatch batch;
 
 	public AbstractGameScreen() {
 		objects = new ArrayList<GameObject>();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
+		batch = new SpriteBatch();
 	}
 
 	@Override
@@ -29,20 +30,30 @@ public abstract class AbstractGameScreen implements Screen {
 	}
 
 	@Override
-	public void render(float delta) {
+	public final void render(float delta) {
+		updateObjects(delta);
+		draw(batch);
+	}
+
+	private void draw(SpriteBatch batch) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		Batch.getBatch().begin();
+		batch.begin();
 		{
 			camera.update();
-			Batch.getBatch().setProjectionMatrix(camera.combined);
+			batch.setProjectionMatrix(camera.combined);
 			for (GameObject o : objects) {
-				o.update(delta);
-				o.draw();
+				o.draw(batch);
 			}
 		}
-		Batch.getBatch().end();
+		batch.end();
+	}
+
+	private void updateObjects(float delta) {
+		for (GameObject o : objects) {
+			o.update(delta);
+		}
 	}
 
 	@Override
@@ -67,6 +78,16 @@ public abstract class AbstractGameScreen implements Screen {
 	public void hide() {
 		// TODO Auto-generated method stub
 
+	}
+
+	protected void spawn(GameObject go) {
+		objects.add(go);
+		go.setParentScreen(this);
+	}
+
+	@Override
+	public final ArrayList<GameObject> getObjects() {
+		return objects;
 	}
 
 	@Override

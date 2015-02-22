@@ -2,7 +2,8 @@ package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.batch.Batch;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sky extends AbstractGameObject {
 
@@ -12,13 +13,13 @@ public class Sky extends AbstractGameObject {
 
 	@Override
 	public void update(float delta) {
-		//TODO
+		// TODO
 	}
 
 	@Override
-	public void draw() {
-		Batch.getBatch()
-				.draw(Assets.sky, position.x, position.y, width, height);
+	public void draw(SpriteBatch batch) {
+		batch.draw(Assets.sky, getPosition().x, getPosition().y,
+				getWidth(), getHeight());
 	}
 
 }
