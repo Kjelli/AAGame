@@ -25,7 +25,7 @@ public class Ground extends AbstractGameObject {
 	public void update(float delta) {
 
 		if (getPosition().x + getWidth() < 0) {
-			getPosition().x += Gdx.graphics.getWidth() + getWidth();
+			getPosition().x += getParentScreen().getCamera().viewportWidth + getWidth();
 			tx = determineTexture();
 		}
 

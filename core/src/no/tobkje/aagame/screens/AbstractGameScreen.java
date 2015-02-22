@@ -19,10 +19,14 @@ public abstract class AbstractGameScreen implements GameScreen {
 	ShapeRenderer sr;
 
 	public AbstractGameScreen() {
+		float gameWidth = 520;
+		float screenWidth = Gdx.graphics.getWidth();
+		float screenHeight = Gdx.graphics.getHeight();
+		float gameHeight = screenHeight / (screenWidth / gameWidth);
+
 		objects = new ArrayList<GameObject>();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		camera.setToOrtho(false, gameWidth, gameHeight);
 		batch = new SpriteBatch();
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
@@ -106,6 +110,12 @@ public abstract class AbstractGameScreen implements GameScreen {
 	@Override
 	public final ArrayList<GameObject> getObjects() {
 		return objects;
+	}
+	
+
+	@Override
+	public OrthographicCamera getCamera() {
+		return camera;
 	}
 
 	@Override
