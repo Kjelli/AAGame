@@ -30,4 +30,12 @@ public class Hitbox {
 		r.x = newPos.x + offsetX;
 		r.y = newPos.y + offsetY;
 	}
+	
+	public float getOffsetX(){
+		return offsetX;
+	}
+	
+	public float getOffsetY(){
+		return offsetY;
+	}
 }

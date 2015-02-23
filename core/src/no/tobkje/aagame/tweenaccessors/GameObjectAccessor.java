@@ -24,6 +24,7 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 			return 2;
 		case ROTATION:
 			returnVal[0] = target.getRotation();
+			return 1;
 		default:
 			return 0;
 		}

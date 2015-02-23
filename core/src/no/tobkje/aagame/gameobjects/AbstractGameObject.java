@@ -12,6 +12,7 @@ public abstract class AbstractGameObject implements GameObject {
 	private final Vector2 position;
 	private final Vector2 velocity;
 	private final Vector2 acceleration;
+	private final Vector2 origin;
 	private Hitbox hitbox;
 
 	private float width;
@@ -28,6 +29,7 @@ public abstract class AbstractGameObject implements GameObject {
 		this.width = width;
 		this.height = height;
 
+		origin = new Vector2(width / 2, height / 2);
 		hitbox = new Hitbox(x, y, width, height);
 	}
 
@@ -65,7 +67,10 @@ public abstract class AbstractGameObject implements GameObject {
 	public void setHeight(float height) {
 		this.height = height;
 	}
-
+	@Override
+	public Vector2 getOrigin() {
+		return origin;
+	}
 	@Override
 	public boolean intersects(GameObject other) {
 		return this.getHitbox().overlaps(other.getHitbox());
@@ -124,8 +129,9 @@ public abstract class AbstractGameObject implements GameObject {
 
 	@Override
 	public void drawDebug(ShapeRenderer sr) {
-		Rectangle r = getHitbox().toRectangle();
-		sr.rect(r.x, r.y, 0, 0, r.width, r.height, 1.0f, 1.0f, rotation);
+		Rectangle r = hitbox.toRectangle();
+		sr.rect(r.x, r.y, origin.x, origin.y, r.width, r.height, 1.0f, 1.0f,
+				rotation);
 	}
 
 	@Override

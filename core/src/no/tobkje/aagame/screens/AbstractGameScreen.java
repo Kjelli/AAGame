@@ -44,6 +44,9 @@ public abstract class AbstractGameScreen implements GameScreen {
 	public final void render(float delta) {
 		if (Settings.get("slow", false))
 			delta *= 0.1f;
+		else if(Settings.get("fast", false)){
+			delta *= 10f;
+		}
 
 		if (resetFlag) {
 			resetLogic();

@@ -8,8 +8,10 @@ import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
+import aurelienribon.tweenengine.equations.Quad;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Man extends AbstractGameObject {
 
@@ -33,6 +35,8 @@ public class Man extends AbstractGameObject {
 		mcl = new ManCollisionListener();
 
 		setHitbox(new Hitbox(x, y, WIDTH / 2, 40, WIDTH / 8, 0));
+		getOrigin().x = WIDTH / 2;
+		getOrigin().y = HEIGHT / 4;
 		Tween.registerAccessor(AbstractGameObject.class,
 				new GameObjectAccessor());
 		manager = new TweenManager();
@@ -44,9 +48,8 @@ public class Man extends AbstractGameObject {
 		runTime += delta;
 		move(delta);
 		CollisionTest.simple(this, mcl);
-		if(getPosition().y + getHeight() < 0){
+		if (getPosition().y + getHeight() < 0) {
 			getParentScreen().reset();
-			System.out.println("RESET");
 		}
 	}
 
@@ -55,21 +58,28 @@ public class Man extends AbstractGameObject {
 			getVelocity().y = JUMP_VELOCITY;
 			getAcceleration().y = -600; // TODO: Centralize gravity
 			onGround = false;
-			Tween.to(this, GameObjectAccessor.ROTATION, 100).target(360)
-					.start(manager);
 		}
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(Assets.mAnimation.getKeyFrame(runTime),
-				Math.round(getPosition().x), Math.round(getPosition().y), 0, 0,
+		TextureRegion region;
+		if (onGround) {
+			region = Assets.mAnimation.getKeyFrame(runTime);
+		} else {
+			region = Assets.manMiddle;
+		}
+		batch.draw(region, Math.round(getPosition().x),
+				Math.round(getPosition().y), getOrigin().x, getOrigin().y,
 				WIDTH, HEIGHT, 1.0f, 1.0f, getRotation());
-		System.out.println(getRotation());
 	}
 
 	public void die() {
+		getVelocity().x = PlayScreen.getLevelVelocity();
 		PlayScreen.setLevelVelocity(0);
+		Tween.to(this, GameObjectAccessor.ROTATION, 0).target(0).start(manager);
+		Tween.to(this, GameObjectAccessor.ROTATION, 2f).target(-720)
+				.ease(Quad.IN).start(manager);
 		getVelocity().y = 200;
 		getAcceleration().y = -300;
 		isDead = true;

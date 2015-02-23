@@ -53,16 +53,26 @@ public interface GameObject {
 	public void setWidth(float width);
 
 	/**
+	 * Get the origin of the object. This is the point of which the object will
+	 * rotate around.
+	 * 
+	 * @return Vector2 containing the origin x,y of the object.
+	 */
+
+	public Vector2 getOrigin();
+
+	/**
 	 * Set the height of the GameObject
 	 * 
 	 * @param height
 	 *            - the new height for the GameObject
 	 */
 	public void setHeight(float height);
-	
+
 	public float getRotation();
+
 	public void setRotation(float rotation);
-	
+
 	/**
 	 * Retrieve the bounds (hitbox) of the GameObject
 	 * 
@@ -132,7 +142,6 @@ public interface GameObject {
 	 */
 	public GameScreen getParentScreen();
 
-	
 	/**
 	 * Set the GameObject's parentscreen. Used for collision-detection.
 	 * 

@@ -33,6 +33,12 @@ public class ManInput implements InputProcessor {
 			else
 				Settings.put("slow", true);
 			return true;
+		case Input.Keys.F:
+			if (Settings.get("fast", false))
+				Settings.put("fast", false);
+			else
+				Settings.put("fast", true);
+			return true;
 		case Input.Keys.R:
 			theMan.getParentScreen().reset();
 
