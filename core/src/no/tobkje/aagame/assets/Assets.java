@@ -10,8 +10,14 @@ public class Assets {
 	 * TextureRegion (0, 0) starts in TOP LEFT corner of the .png file.
 	 */
 
-	public static Texture spritesheet;
+	public static Texture tilesheet;
 	public static TextureRegion ground;
+
+	public static Texture spacesheet;
+	public static TextureRegion space_bg;
+	
+	public static Texture starsheet;
+	public static TextureRegion star;
 
 	public static Texture manSheet;
 	public static Animation mAnimation;
@@ -26,8 +32,16 @@ public class Assets {
 	}
 
 	private static void loadBackground() {
-		spritesheet = new Texture("tiles_2.png");
-		ground = loadAndFlip(spritesheet, 0, 160, 80, 160);
+		tilesheet = new Texture("tiles_1.png");
+		ground = loadAndFlip(tilesheet, 0, 160, 80, 160);
+
+		spacesheet = new Texture("space-1.png");
+		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
+				spacesheet.getHeight());
+		
+		starsheet = new Texture("star.png");
+		star = loadAndFlip(starsheet, 0, 0, starsheet.getWidth(), starsheet.getHeight());
+
 	}
 
 	private static void loadGameObjects() {
@@ -53,7 +67,7 @@ public class Assets {
 	}
 
 	public static void dispose() {
-		spritesheet.dispose();
+		tilesheet.dispose();
 		manSheet.dispose();
 		sawSheet.dispose();
 	}

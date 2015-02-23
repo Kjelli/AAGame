@@ -1,5 +1,7 @@
 package no.tobkje.aagame.backgrounds;
 
+import no.tobkje.aagame.AAGame;
+import no.tobkje.aagame.backgroundobjects.SpaceImage;
 import no.tobkje.aagame.backgroundobjects.Star;
 import no.tobkje.aagame.screens.GameScreen;
 
@@ -16,10 +18,10 @@ public class PlayBackground extends AbstractBackground {
 	public PlayBackground() {
 		super(LAYER_COUNT);
 
-		backestest = new Layer(this, 0.0f);
-		backest = new Layer(this, 0.2f);
-		backer = new Layer(this, 0.4f);
-		back = new Layer(this, 0.8f);
+		backestest = new Layer(this, 0.01f);
+		backest = new Layer(this, 0.03f);
+		backer = new Layer(this, 0.06f);
+		back = new Layer(this, 0.08f);
 
 		setLayer(0, backestest);
 		setLayer(1, backest);
@@ -29,10 +31,13 @@ public class PlayBackground extends AbstractBackground {
 
 	@Override
 	public void init() {
-		backestest.spawn(new Star(400, 200));
-		backest.spawn(new Star(400, 200));
-		backer.spawn(new Star(400, 200));
-		back.spawn(new Star(400, 200));
+		backestest.spawn(new SpaceImage());
+		for (int i = 0; i < 200; i++) {
+			int layerIndex = (int) (Math.random() * (getLayers().length - 1)) + 1;
+			Layer l = getLayers()[layerIndex];
+			l.spawn(new Star((float) Math.random() * AAGame.GAME_WIDTH,
+					(float) Math.random() * AAGame.GAME_HEIGHT));
+		}
 	}
 
 	@Override

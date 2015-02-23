@@ -2,6 +2,7 @@ package no.tobkje.aagame.screens;
 
 import java.util.ArrayList;
 
+import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
@@ -27,13 +28,9 @@ public abstract class AbstractGameScreen implements GameScreen {
 	private boolean resetFlag = false;
 
 	public AbstractGameScreen() {
-		float gameWidth = 520;
-		float screenWidth = Gdx.graphics.getWidth();
-		float screenHeight = Gdx.graphics.getHeight();
-		float gameHeight = screenHeight / (screenWidth / gameWidth);
 		objects = new ArrayList<GameObject>();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, gameWidth, gameHeight);
+		camera.setToOrtho(false, AAGame.GAME_WIDTH, AAGame.GAME_HEIGHT);
 		batch = new SpriteBatch();
 		manager = new TweenManager();
 		Tween.registerAccessor(AbstractGameObject.class,
