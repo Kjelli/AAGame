@@ -1,10 +1,9 @@
 package no.tobkje.aagame.screens;
 
+import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
-import no.tobkje.aagame.gameobjects.GroundFiller;
 import no.tobkje.aagame.gameobjects.HalfSaw;
 import no.tobkje.aagame.gameobjects.Man;
-import no.tobkje.aagame.gameobjects.Sky;
 import no.tobkje.aagame.input.ManInput;
 
 import com.badlogic.gdx.Gdx;
@@ -20,33 +19,32 @@ public class PlayScreen extends AbstractGameScreen {
 
 	public PlayScreen() {
 		super();
+		setBackground(new PlayBackground());
 	}
 
 	@Override
 	public void show() {
-		super.show();
 		init();
 	}
 
 	@Override
 	public void init() {
+		initBackground();
 		initGame();
 		initInput();
 	}
 
 	private void initGame() {
-		getObjects().add(new Sky());
-		theMan = new Man(60, 95);
+		theMan = new Man(40, 68);
 
 		for (int i = 0; i <= 10; i++) {
-			spawn(new Ground(Ground.WIDTH * i, 30));
+			spawn(new Ground(Ground.WIDTH * i, -60));
 		}
-		spawn(new HalfSaw(400, 30 + Ground.HEIGHT));
-		spawn(new HalfSaw(520, 30 + Ground.HEIGHT));
-		spawn(new HalfSaw(640, 30 + Ground.HEIGHT));
-		spawn(new GroundFiller(30));
+		spawn(new HalfSaw(400, -60 + Ground.HEIGHT));
+		// spawn(new HalfSaw(520, -60 + Ground.HEIGHT));
+		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 		spawn(theMan);
-		
+
 		levelVelocity = LEVEL_VELOCITY_INITIAL;
 	}
 

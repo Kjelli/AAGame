@@ -108,7 +108,6 @@ public abstract class AbstractGameObject implements GameObject {
 		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
 		hitbox.update(position);
-
 	}
 
 	@Override

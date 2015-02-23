@@ -28,8 +28,6 @@ public class Man extends AbstractGameObject {
 	private boolean isDead = false;
 	private ManCollisionListener mcl;
 
-	TweenManager manager;
-
 	public Man(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
 		mcl = new ManCollisionListener();
@@ -37,14 +35,10 @@ public class Man extends AbstractGameObject {
 		setHitbox(new Hitbox(x, y, WIDTH / 2, 40, WIDTH / 8, 0));
 		getOrigin().x = WIDTH / 2;
 		getOrigin().y = HEIGHT / 4;
-		Tween.registerAccessor(AbstractGameObject.class,
-				new GameObjectAccessor());
-		manager = new TweenManager();
 	}
 
 	@Override
 	public void update(float delta) {
-		manager.update(delta);
 		runTime += delta;
 		move(delta);
 		CollisionTest.simple(this, mcl);
@@ -67,7 +61,7 @@ public class Man extends AbstractGameObject {
 		if (onGround) {
 			region = Assets.mAnimation.getKeyFrame(runTime);
 		} else {
-			region = Assets.manMiddle;
+			region = Assets.man_walk[3];
 		}
 		batch.draw(region, Math.round(getPosition().x),
 				Math.round(getPosition().y), getOrigin().x, getOrigin().y,
@@ -77,13 +71,18 @@ public class Man extends AbstractGameObject {
 	public void die() {
 		getVelocity().x = PlayScreen.getLevelVelocity();
 		PlayScreen.setLevelVelocity(0);
-		Tween.to(this, GameObjectAccessor.ROTATION, 0).target(0).start(manager);
-		Tween.to(this, GameObjectAccessor.ROTATION, 2f).target(-720)
-				.ease(Quad.IN).start(manager);
+		frontFlip();
 		getVelocity().y = 200;
 		getAcceleration().y = -300;
 		isDead = true;
 		onGround = false;
+	}
+
+	private void frontFlip() {
+		Tween.to(this, GameObjectAccessor.ROTATION, 0).target(0)
+				.start(getParentScreen().getTweenManager());
+		Tween.to(this, GameObjectAccessor.ROTATION, 2f).target(-720)
+				.ease(Quad.IN).start(getParentScreen().getTweenManager());
 	}
 
 	class ManCollisionListener implements CollisionListener {

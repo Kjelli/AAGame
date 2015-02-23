@@ -11,11 +11,11 @@ public class Assets {
 	 */
 
 	public static Texture spritesheet;
-	public static TextureRegion groundTop, groundTop2, groundFiller, sky;
+	public static TextureRegion ground;
 
 	public static Texture manSheet;
 	public static Animation mAnimation;
-	public static TextureRegion manStart, manMiddle, manEnd;
+	public static TextureRegion[] man_walk;
 
 	public static Texture sawSheet;
 	public static TextureRegion halfSaw, saw;
@@ -26,22 +26,18 @@ public class Assets {
 	}
 
 	private static void loadBackground() {
-		spritesheet = new Texture("sprites1.png");
-		groundTop = loadAndFlip(spritesheet, 0, 0, 16, 16);
-		groundTop2 = loadAndFlip(spritesheet, 16, 0, 16, 16);
-		groundFiller = loadAndFlip(spritesheet, 0, 16, 16, 16);
-		sky = loadAndFlip(spritesheet, 16, 16, 16, 16);
+		spritesheet = new Texture("tiles_2.png");
+		ground = loadAndFlip(spritesheet, 0, 160, 80, 160);
 	}
 
 	private static void loadGameObjects() {
-		manSheet = new Texture("rock-running-3.png");
-		manStart = loadAndFlip(manSheet, 14, 0, 121, 160);
-		manMiddle = loadAndFlip(manSheet, 185, 0, 121, 160);
-		manEnd = loadAndFlip(manSheet, 330, 0, 121, 160);
-
-		TextureRegion[] men = { manStart, manMiddle, manEnd };
-		mAnimation = new Animation(0.15f, men);
-		mAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+		manSheet = new Texture("player.png");
+		man_walk = new TextureRegion[8];
+		for (int i = 0; i < 8; i++) {
+			man_walk[i] = loadAndFlip(manSheet, (i) * 16, 0, 16, 16);
+		}
+		mAnimation = new Animation(0.10f, man_walk);
+		mAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 		sawSheet = new Texture("saw.png");
 		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
