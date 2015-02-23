@@ -7,6 +7,7 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 	public static final int POSITION_X = 1;
 	public static final int POSITION_Y = 2;
 	public static final int POSITION_XY = 3;
+	public static final int ROTATION = 4;
 
 	@Override
 	public int getValues(GameObject target, int type, float[] returnVal) {
@@ -21,6 +22,8 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 			returnVal[0] = target.getPosition().x;
 			returnVal[1] = target.getPosition().y;
 			return 2;
+		case ROTATION:
+			returnVal[0] = target.getRotation();
 		default:
 			return 0;
 		}
@@ -38,6 +41,9 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 		case POSITION_XY:
 			target.getPosition().x = newVal[0];
 			target.getPosition().y = newVal[1];
+			break;
+		case ROTATION:
+			target.setRotation(newVal[0]);
 			break;
 		}
 	}

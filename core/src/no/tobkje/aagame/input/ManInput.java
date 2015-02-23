@@ -32,6 +32,9 @@ public class ManInput implements InputProcessor {
 				Settings.put("slow", false);
 			else
 				Settings.put("slow", true);
+			return true;
+		case Input.Keys.R:
+			theMan.getParentScreen().reset();
 
 		}
 		return false;

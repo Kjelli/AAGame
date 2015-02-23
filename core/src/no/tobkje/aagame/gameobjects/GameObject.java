@@ -59,7 +59,10 @@ public interface GameObject {
 	 *            - the new height for the GameObject
 	 */
 	public void setHeight(float height);
-
+	
+	public float getRotation();
+	public void setRotation(float rotation);
+	
 	/**
 	 * Retrieve the bounds (hitbox) of the GameObject
 	 * 
@@ -123,17 +126,13 @@ public interface GameObject {
 	public void drawDebug(ShapeRenderer sr);
 
 	/**
-	 * Destroy the object TODO: game-logic dependent stuff?
-	 */
-	public void destroy();
-
-	/**
 	 * Retrieve the GameObject's parentscreen
 	 * 
 	 * @return Screen object containing this GameObject
 	 */
 	public GameScreen getParentScreen();
 
+	
 	/**
 	 * Set the GameObject's parentscreen. Used for collision-detection.
 	 * 
@@ -141,4 +140,9 @@ public interface GameObject {
 	 *            - The screen to contain the GameObject
 	 */
 	public void setParentScreen(GameScreen gameScreen);
+
+	/**
+	 * Destroy the object TODO: game-logic dependent stuff?
+	 */
+	public void destroy();
 }

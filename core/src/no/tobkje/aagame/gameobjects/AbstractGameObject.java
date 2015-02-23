@@ -16,6 +16,8 @@ public abstract class AbstractGameObject implements GameObject {
 
 	private float width;
 	private float height;
+	private float rotation;
+
 	private GameScreen parentScreen;
 
 	public AbstractGameObject(float x, float y, float width, float height) {
@@ -123,7 +125,16 @@ public abstract class AbstractGameObject implements GameObject {
 	@Override
 	public void drawDebug(ShapeRenderer sr) {
 		Rectangle r = getHitbox().toRectangle();
-		sr.rect(r.x, r.y, r.width, r.height);
+		sr.rect(r.x, r.y, 0, 0, r.width, r.height, 1.0f, 1.0f, rotation);
 	}
 
+	@Override
+	public float getRotation() {
+		return rotation;
+	}
+
+	@Override
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
 }

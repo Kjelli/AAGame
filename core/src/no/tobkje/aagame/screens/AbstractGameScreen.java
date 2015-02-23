@@ -18,6 +18,8 @@ public abstract class AbstractGameScreen implements GameScreen {
 	private final SpriteBatch batch;
 	ShapeRenderer sr;
 
+	private boolean resetFlag = false;
+
 	public AbstractGameScreen() {
 		float gameWidth = 520;
 		float screenWidth = Gdx.graphics.getWidth();
@@ -42,8 +44,15 @@ public abstract class AbstractGameScreen implements GameScreen {
 	public final void render(float delta) {
 		if (Settings.get("slow", false))
 			delta *= 0.1f;
+
+		if (resetFlag) {
+			resetLogic();
+			return;
+		}
+
 		updateObjects(delta);
 		draw(batch);
+
 		if (Settings.get("debug", false)) {
 			drawDebug(sr);
 		}
@@ -111,11 +120,21 @@ public abstract class AbstractGameScreen implements GameScreen {
 	public final ArrayList<GameObject> getObjects() {
 		return objects;
 	}
-	
 
 	@Override
 	public OrthographicCamera getCamera() {
 		return camera;
+	}
+
+	@Override
+	public void reset() {
+		resetFlag = true;
+	}
+	
+	private void resetLogic(){
+		resetFlag = false;
+		objects.clear();
+		init();
 	}
 
 	@Override
