@@ -15,13 +15,17 @@ public class Assets {
 
 	public static Texture spacesheet;
 	public static TextureRegion space_bg;
-	
+
 	public static Texture starsheet;
 	public static TextureRegion star;
 
 	public static Texture manSheet;
 	public static Animation mAnimation;
 	public static TextureRegion[] man_walk;
+
+	public static Texture flyingSheet;
+	public static Animation flyAnimation;
+	public static TextureRegion[] man_fly;
 
 	public static Texture sawSheet;
 	public static TextureRegion halfSaw, saw;
@@ -38,9 +42,10 @@ public class Assets {
 		spacesheet = new Texture("space-1.png");
 		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
 				spacesheet.getHeight());
-		
+
 		starsheet = new Texture("star.png");
-		star = loadAndFlip(starsheet, 0, 0, starsheet.getWidth(), starsheet.getHeight());
+		star = loadAndFlip(starsheet, 0, 0, starsheet.getWidth(),
+				starsheet.getHeight());
 
 	}
 
@@ -52,6 +57,14 @@ public class Assets {
 		}
 		mAnimation = new Animation(0.10f, man_walk);
 		mAnimation.setPlayMode(Animation.PlayMode.LOOP);
+		
+		flyingSheet = new Texture("playerFly.png");
+		man_fly = new TextureRegion[3];
+		for (int i = 0; i < 8; i++) {
+			man_fly[i] = loadAndFlip(flyingSheet, i * 16, 0, 16, 16);
+		}
+		flyAnimation = new Animation(0.10f, man_fly);
+		flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 		sawSheet = new Texture("saw.png");
 		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);

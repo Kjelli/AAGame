@@ -1,10 +1,8 @@
 package no.tobkje.aagame.input;
 
 import no.tobkje.aagame.gameobjects.player.Man;
-import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.settings.Settings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
