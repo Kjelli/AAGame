@@ -2,17 +2,12 @@ package no.tobkje.aagame.gameobjects.player;
 
 import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.collisions.CollisionListener;
 import no.tobkje.aagame.collisions.CollisionTest;
 import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
-import no.tobkje.aagame.gameobjects.GameObject;
-import no.tobkje.aagame.gameobjects.Ground;
-import no.tobkje.aagame.gameobjects.HalfSaw;
 import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Quad;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -61,12 +56,12 @@ public class Man extends AbstractGameObject {
 		move(delta);
 
 		CollisionTest.simple(this, mcl);
-		
-		if(getPosition().y + getHeight() > AAGame.GAME_HEIGHT){
+
+		if (getPosition().y + getHeight() > AAGame.GAME_HEIGHT) {
 			getPosition().y = AAGame.GAME_HEIGHT - getHeight();
 			getVelocity().y = 0;
 		}
-		
+
 		if (getPosition().y + getHeight() < 0) {
 			getParentScreen().reset();
 		}
@@ -102,7 +97,12 @@ public class Man extends AbstractGameObject {
 			region = Assets.mAnimation.getKeyFrame(runTime);
 		} else {
 			// When jumping it displays one frame.
-			region = Assets.man_walk[3];
+			if (jetpacking) {
+				region = Assets.flyAnimation.getKeyFrame(runTime);
+			} else {
+				region = Assets.man_walk[3];
+			}
+
 		}
 		batch.draw(region, Math.round(getPosition().x),
 				Math.round(getPosition().y), getOrigin().x, getOrigin().y,
