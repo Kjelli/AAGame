@@ -5,12 +5,26 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
-	public static Texture spritesheet;
-	public static TextureRegion groundTop, groundTop2, groundFiller, sky;
+
+	/**
+	 * TextureRegion (0, 0) starts in TOP LEFT corner of the .png file.
+	 */
+
+	public static Texture tilesheet;
+	public static TextureRegion ground;
+
+	public static Texture spacesheet;
+	public static TextureRegion space_bg;
+	
+	public static Texture starsheet;
+	public static TextureRegion star;
 
 	public static Texture manSheet;
 	public static Animation mAnimation;
-	public static TextureRegion manStart, manMiddle, manEnd;
+	public static TextureRegion[] man_walk;
+
+	public static Texture sawSheet;
+	public static TextureRegion halfSaw, saw;
 
 	public static void load() {
 		loadBackground();
@@ -18,23 +32,31 @@ public class Assets {
 	}
 
 	private static void loadBackground() {
-		spritesheet = new Texture("sprites1.png");
-		groundTop = loadAndFlip(spritesheet, 0, 0, 16, 16);
-		groundTop2 = loadAndFlip(spritesheet, 16, 0, 16, 16);
-		groundFiller = loadAndFlip(spritesheet, 0, 16, 16, 16);
-		sky = loadAndFlip(spritesheet, 16, 16, 16, 16);
+		tilesheet = new Texture("tiles_1.png");
+		ground = loadAndFlip(tilesheet, 0, 160, 80, 160);
+
+		spacesheet = new Texture("space-1.png");
+		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
+				spacesheet.getHeight());
+		
+		starsheet = new Texture("star.png");
+		star = loadAndFlip(starsheet, 0, 0, starsheet.getWidth(), starsheet.getHeight());
+
 	}
 
 	private static void loadGameObjects() {
-		// Tryna make man appear / run (Y)
-		manSheet = new Texture("rock-running-3.png");
-		manStart = loadAndFlip(manSheet, 14, 0, 121, 160);
-		manMiddle = loadAndFlip(manSheet, 185, 0, 121, 160);
-		manEnd = loadAndFlip(manSheet, 330, 0, 121, 160);
+		manSheet = new Texture("player.png");
+		man_walk = new TextureRegion[8];
+		for (int i = 0; i < 8; i++) {
+			man_walk[i] = loadAndFlip(manSheet, (i) * 16, 0, 16, 16);
+		}
+		mAnimation = new Animation(0.10f, man_walk);
+		mAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
-		TextureRegion[] men = { manStart, manMiddle, manEnd };
-		mAnimation = new Animation(0.15f, men);
-		mAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+		sawSheet = new Texture("saw.png");
+		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
+		halfSaw.flip(false, true);
+		saw = loadAndFlip(sawSheet, 0, 0, 400, 400);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -45,7 +67,8 @@ public class Assets {
 	}
 
 	public static void dispose() {
-		spritesheet.dispose();
+		tilesheet.dispose();
 		manSheet.dispose();
+		sawSheet.dispose();
 	}
 }

@@ -1,15 +1,25 @@
 package no.tobkje.aagame.gameobjects;
 
+import no.tobkje.aagame.collisions.Hitbox;
+import no.tobkje.aagame.screens.GameScreen;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractGameObject implements GameObject {
-	protected final Vector2 position;
-	protected final Vector2 velocity;
-	protected final Vector2 acceleration;
+	private final Vector2 position;
+	private final Vector2 velocity;
+	private final Vector2 acceleration;
+	private final Vector2 origin;
+	private Hitbox hitbox;
 
-	protected float width;
-	protected float height;
+	private float width;
+	private float height;
+	private float rotation;
+
+	private GameScreen parentScreen;
 
 	public AbstractGameObject(float x, float y, float width, float height) {
 		position = new Vector2(x, y);
@@ -18,6 +28,9 @@ public abstract class AbstractGameObject implements GameObject {
 
 		this.width = width;
 		this.height = height;
+
+		origin = new Vector2(width / 2, height / 2);
+		hitbox = new Hitbox(x, y, width, height);
 	}
 
 	@Override
@@ -54,10 +67,21 @@ public abstract class AbstractGameObject implements GameObject {
 	public void setHeight(float height) {
 		this.height = height;
 	}
-
+	@Override
+	public Vector2 getOrigin() {
+		return origin;
+	}
 	@Override
 	public boolean intersects(GameObject other) {
-		return false;
+		return this.getHitbox().overlaps(other.getHitbox());
+	}
+
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+
+	public void setHitbox(Hitbox hitbox) {
+		this.hitbox = hitbox;
 	}
 
 	/*
@@ -83,7 +107,17 @@ public abstract class AbstractGameObject implements GameObject {
 	public void move(float delta) {
 		velocity.add(acceleration.cpy().scl(delta));
 		position.add(velocity.cpy().scl(delta));
+		hitbox.update(position);
+	}
 
+	@Override
+	public GameScreen getParentScreen() {
+		return parentScreen;
+	}
+
+	@Override
+	public void setParentScreen(GameScreen gameScreen) {
+		this.parentScreen = gameScreen;
 	}
 
 	@Override
@@ -92,4 +126,20 @@ public abstract class AbstractGameObject implements GameObject {
 
 	}
 
+	@Override
+	public void drawDebug(ShapeRenderer sr) {
+		Rectangle r = hitbox.toRectangle();
+		sr.rect(r.x, r.y, origin.x, origin.y, r.width, r.height, 1.0f, 1.0f,
+				rotation);
+	}
+
+	@Override
+	public float getRotation() {
+		return rotation;
+	}
+
+	@Override
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
 }

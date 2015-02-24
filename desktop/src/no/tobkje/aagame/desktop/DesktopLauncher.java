@@ -7,8 +7,8 @@ import no.tobkje.aagame.AAGame;
 public class DesktopLauncher {
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = AAGame.GAME_WIDTH;
-		config.height = AAGame.GAME_HEIGHT;
+		config.width = 520;
+		config.height = 320;
 		new LwjglApplication(new AAGame(), config);
 	}
 }

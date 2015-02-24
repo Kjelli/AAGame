@@ -1,7 +1,8 @@
 package no.tobkje.aagame.input;
 
 import no.tobkje.aagame.gameobjects.Man;
-import no.tobkje.aagame.screens.GameScreen;
+import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.settings.Settings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,8 +19,29 @@ public class ManInput implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
 		case Input.Keys.SPACE:
-			theMan.onClick();
+			theMan.jump();
 			return true;
+		case Input.Keys.D:
+			if (Settings.get("debug", false))
+				Settings.put("debug", false);
+			else
+				Settings.put("debug", true);
+			return true;
+		case Input.Keys.S:
+			if (Settings.get("slow", false))
+				Settings.put("slow", false);
+			else
+				Settings.put("slow", true);
+			return true;
+		case Input.Keys.F:
+			if (Settings.get("fast", false))
+				Settings.put("fast", false);
+			else
+				Settings.put("fast", true);
+			return true;
+		case Input.Keys.R:
+			theMan.getParentScreen().reset();
+
 		}
 		return false;
 	}
@@ -38,12 +60,8 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (theMan.contains(screenX,screenY)
-				&& button == Input.Buttons.LEFT) {
-			theMan.onClick();
-			return true;
-		}
-		return false;
+		theMan.jump();
+		return true;
 	}
 
 	@Override
