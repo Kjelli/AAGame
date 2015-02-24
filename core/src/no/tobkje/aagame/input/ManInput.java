@@ -1,6 +1,6 @@
 package no.tobkje.aagame.input;
 
-import no.tobkje.aagame.gameobjects.Man;
+import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.settings.Settings;
 
@@ -48,7 +48,11 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+		switch (keycode) {
+		case Input.Keys.SPACE:
+			theMan.jumpRelease();
+			return true;
+		}
 		return false;
 	}
 
@@ -66,7 +70,7 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		theMan.jumpRelease();
 		return false;
 	}
 
