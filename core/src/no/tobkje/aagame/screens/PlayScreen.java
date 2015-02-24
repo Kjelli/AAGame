@@ -3,7 +3,7 @@ package no.tobkje.aagame.screens;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.HalfSaw;
-import no.tobkje.aagame.gameobjects.Man;
+import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.input.ManInput;
 
 import com.badlogic.gdx.Gdx;
