@@ -61,6 +61,7 @@ public class Man extends AbstractGameObject {
 		if (onGround) {
 			region = Assets.mAnimation.getKeyFrame(runTime);
 		} else {
+			// When jumping it displays one frame.
 			region = Assets.man_walk[3];
 		}
 		batch.draw(region, Math.round(getPosition().x),
