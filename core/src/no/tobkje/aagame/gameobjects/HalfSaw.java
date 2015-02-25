@@ -10,7 +10,6 @@ public class HalfSaw extends AbstractGameObject {
 
 	public static final float WIDTH = 48, HEIGHT = 24;
 	public static final float y = -60 + Ground.HEIGHT;
-	public final float viewportWidth = getParentScreen().getCamera().viewportWidth;
 
 	public HalfSaw(float x) {
 		super(x, y, WIDTH, HEIGHT);
@@ -34,7 +33,7 @@ public class HalfSaw extends AbstractGameObject {
 	// Kjelli wouldn't like :(
 	public void moveHalfSaw() {
 		if (getPosition().x + getWidth() < 0) {
-			getPosition().x += ((viewportWidth + getWidth()) * (Math
+			getPosition().x += ((getParentScreen().getCamera().viewportWidth + getWidth()) * (Math
 					.random() + 1));
 		}
 	}
