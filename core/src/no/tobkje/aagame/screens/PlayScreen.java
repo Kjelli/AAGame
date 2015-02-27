@@ -40,7 +40,7 @@ public class PlayScreen extends AbstractGameScreen {
 		for (int i = 0; i <= 10; i++) {
 			spawn(new Ground(Ground.WIDTH * i, -60));
 		}
-		spawn(new HalfSaw(400, -60 + Ground.HEIGHT));
+		spawn(new HalfSaw(400));
 		// spawn(new HalfSaw(520, -60 + Ground.HEIGHT));
 		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 		spawn(theMan);
