@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Man extends AbstractGameObject {
 
-	public static final float WIDTH = 47, HEIGHT = 64;
+	public static final float WIDTH = 48, HEIGHT = 64;
 	private static final float JUMP_VELOCITY = 300;
 	public static final float GRAVITY = -600; // TODO: Centralize gravity
 
@@ -31,7 +31,7 @@ public class Man extends AbstractGameObject {
 		super(x, y, WIDTH, HEIGHT);
 		mcl = new ManCollisionListener(this);
 
-		setHitbox(new Hitbox(x, y, WIDTH / 2, 40, WIDTH / 8, 0));
+		setHitbox(new Hitbox(x, y, WIDTH / 2, 40, WIDTH / 4, 0));
 		getOrigin().x = WIDTH / 2;
 		getOrigin().y = HEIGHT / 4;
 
