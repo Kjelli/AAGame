@@ -20,7 +20,6 @@ public class Man extends AbstractGameObject {
 	public static final float GRAVITY = -600; // TODO: Centralize gravity
 
 	private float runTime = 0;
-	private boolean jetpacking = false;
 	private boolean onGround = true;
 	private boolean isDead = false;
 
@@ -35,7 +34,7 @@ public class Man extends AbstractGameObject {
 		getOrigin().x = WIDTH / 2;
 		getOrigin().y = HEIGHT / 4;
 
-		jetpack = new Jetpack(this);
+		jetpack = new Jetpack();
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class Man extends AbstractGameObject {
 	private void movementLogic(float delta) {
 
 		jetpack.update(delta);
-		if (jetpacking) {
+		if (jetpack.isThrusting()) {
 			getAcceleration().y = jetpack.getThrust();
 		}
 
@@ -73,7 +72,11 @@ public class Man extends AbstractGameObject {
 			getAcceleration().y = GRAVITY; // TODO: Centralize gravity
 			setOnGround(false);
 		} else {
-			jetpacking = true;
+
+			// Small burst for first jetpack-thrust
+			if (jetpack.getEnergy() == jetpack.getMaxEnergy()) {
+				getVelocity().y += 200;
+			}
 			jetpack.setThrusting(true);
 			if (getPosition().y - getHeight() < AAGame.GAME_HEIGHT)
 				getAcceleration().y = jetpack.getThrust();
@@ -83,10 +86,9 @@ public class Man extends AbstractGameObject {
 	}
 
 	public void jumpRelease() {
-		if (jetpacking) {
+		if (jetpack.isThrusting()) {
 			getAcceleration().y = GRAVITY;
 			jetpack.setThrusting(false);
-			jetpacking = false;
 		}
 	}
 
@@ -97,10 +99,14 @@ public class Man extends AbstractGameObject {
 			region = Assets.mAnimation.getKeyFrame(runTime);
 		} else {
 			// When jumping it displays one frame.
-			if (jetpacking) {
-				region = Assets.flyAnimation.getKeyFrame(runTime);
+			if (jetpack.isThrusting()) {
+				if (jetpack.getEnergy() > 0) {
+					region = Assets.flyAnimation.getKeyFrame(runTime);
+				} else {
+					region = Assets.man_fly_nofuel;
+				}
 			} else {
-				region = Assets.man_walk[3];
+				region = Assets.man_fly_nofuel;
 			}
 
 		}
@@ -144,7 +150,6 @@ public class Man extends AbstractGameObject {
 
 	public void land() {
 		jetpack.setThrusting(false);
-		jetpacking = false;
 		jetpack.resetCooldown();
 		setOnGround(true);
 		getVelocity().y = 0;

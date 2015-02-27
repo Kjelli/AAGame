@@ -24,6 +24,7 @@ public class Assets {
 	public static TextureRegion[] man_walk;
 	public static Animation flyAnimation;
 	public static TextureRegion[] man_fly;
+	public static TextureRegion man_fly_nofuel;
 
 	public static Texture sawSheet;
 	public static TextureRegion halfSaw, saw;
@@ -62,6 +63,7 @@ public class Assets {
 		}
 		flyAnimation = new Animation(0.10f, man_fly);
 		flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
+		man_fly_nofuel = loadAndFlip(manSheet, 48, 16, 16, 16);
 
 		sawSheet = new Texture("saw.png");
 		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
