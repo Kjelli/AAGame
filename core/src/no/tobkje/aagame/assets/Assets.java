@@ -34,6 +34,9 @@ public class Assets {
 	public static Animation baddie_blue_walk_animation;
 	public static TextureRegion baddie_blue_walk[];
 	public static TextureRegion baddie_blue_dead;
+	public static Animation baddie_spike_walk_animation;
+	public static TextureRegion baddie_spike_walk[];
+	public static TextureRegion baddie_spike_dead;
 
 	public static void load() {
 		loadBackground();
@@ -86,10 +89,17 @@ public class Assets {
 		for (int i = 0; i < 6; i++) {
 			baddie_blue_walk[i] = loadAndFlip(baddies, 0 + i * 16, 12, 16, 15);
 		}
-		baddie_blue_walk_animation = new Animation(0.10f, baddie_blue_walk);
+		baddie_blue_walk_animation = new Animation(0.15f, baddie_blue_walk);
 		baddie_blue_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
 		baddie_blue_dead = loadAndFlip(baddies, 48, 0, 16, 15);
+		
+		baddie_spike_walk = new TextureRegion[6];
+		for (int i = 0; i < 6; i++) {
+			baddie_spike_walk[i] = loadAndFlip(baddies, 0 + i * 16, 44, 16, 15);
+		}
+		baddie_spike_walk_animation = new Animation(0.15f, baddie_spike_walk);
+		baddie_spike_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,

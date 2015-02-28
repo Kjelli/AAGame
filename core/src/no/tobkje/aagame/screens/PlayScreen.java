@@ -3,7 +3,8 @@ package no.tobkje.aagame.screens;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.baddies.HalfSaw;
-import no.tobkje.aagame.gameobjects.baddies.MiniMan;
+import no.tobkje.aagame.gameobjects.baddies.MiniManBlue;
+import no.tobkje.aagame.gameobjects.baddies.MiniManSpike;
 import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.input.ManInput;
 
@@ -68,9 +69,10 @@ public class PlayScreen extends AbstractGameScreen {
 
 	@Override
 	protected void updateScreen(float delta) {
-		if (Math.random() < 0.05f)
-			for (int i = 0; i < 4; i++) {
-				spawn(new MiniMan(500 + 40 * i, 68));
-			}
+		if (Math.random() < 0.005f)
+			spawn(new MiniManBlue(500, 68));
+		else if(Math.random() < 0.005f)
+			spawn(new MiniManSpike(500, 68));
+
 	}
 }
