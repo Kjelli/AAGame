@@ -2,6 +2,8 @@ package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.GameScreen;
+import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.tweens.GameObjectTweens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -20,6 +22,9 @@ public abstract class AbstractGameObject implements GameObject {
 	private float rotation;
 
 	private GameScreen parentScreen;
+
+	private boolean onGround = false;
+	private boolean isDead = false;
 
 	public AbstractGameObject(float x, float y, float width, float height) {
 		position = new Vector2(x, y);
@@ -67,10 +72,12 @@ public abstract class AbstractGameObject implements GameObject {
 	public void setHeight(float height) {
 		this.height = height;
 	}
+
 	@Override
 	public Vector2 getOrigin() {
 		return origin;
 	}
+
 	@Override
 	public boolean intersects(GameObject other) {
 		return this.getHitbox().overlaps(other.getHitbox());
@@ -95,9 +102,8 @@ public abstract class AbstractGameObject implements GameObject {
 	 */
 	@Override
 	public final boolean contains(float x, float y) {
-		return (x >= position.x && x <= position.x + width
-				&& Gdx.graphics.getHeight() - y >= position.y && Gdx.graphics
-				.getHeight() - y <= position.y + height);
+		return (x >= position.x && x <= position.x + width && y >= position.y && y <= position.y
+				+ height);
 	}
 
 	@Override
@@ -118,6 +124,41 @@ public abstract class AbstractGameObject implements GameObject {
 	@Override
 	public void setParentScreen(GameScreen gameScreen) {
 		this.parentScreen = gameScreen;
+	}
+
+	public boolean isOnGround() {
+		return onGround;
+	}
+
+	public void setOnGround(boolean onGround) {
+		this.onGround = onGround;
+	}
+
+	public void die() {
+		if (isDead)
+			return;
+		GameObjectTweens.frontFlip(this);
+		getVelocity().y = 200;
+		getAcceleration().y = -300;
+		setDead(true);
+		setOnGround(false);
+	}
+
+	public void land(GameObject target) {
+		setOnGround(true);
+		getVelocity().y = 0;
+		getAcceleration().y = 0;
+		// Nudge back over ground
+		getPosition().y = (target.getHitbox().getY()
+				+ target.getHitbox().getHeight() + 1);
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
 	}
 
 	@Override

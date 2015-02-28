@@ -5,23 +5,24 @@ import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.collisions.CollisionTest;
 import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
+import no.tobkje.aagame.gameobjects.GameObject;
+import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.equations.Quad;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 public class Man extends AbstractGameObject {
 
 	public static final float WIDTH = 48, HEIGHT = 64;
 	private static final float JUMP_VELOCITY = 300;
-	public static final float GRAVITY = -600; // TODO: Centralize gravity
 
 	private float runTime = 0;
-	private boolean onGround = true;
-	private boolean isDead = false;
 
 	private Jetpack jetpack;
 	private ManCollisionListener mcl;
@@ -53,12 +54,15 @@ public class Man extends AbstractGameObject {
 		}
 
 		move(delta);
-
+		if (!isOnGround()) {
+			Gravity.fall(this, delta);
+		}
 		CollisionTest.simple(this, mcl);
 
-		if (getPosition().y + getHeight() > AAGame.GAME_HEIGHT) {
+		if (getPosition().y + getHeight() >= AAGame.GAME_HEIGHT) {
 			getPosition().y = AAGame.GAME_HEIGHT - getHeight();
-			getVelocity().y = 0;
+			getVelocity().y = -1;
+
 		}
 
 		if (getPosition().y + getHeight() < 0) {
@@ -66,29 +70,26 @@ public class Man extends AbstractGameObject {
 		}
 	}
 
-	public void jump() {
-		if (isOnGround()) {
-			getVelocity().y = JUMP_VELOCITY;
-			getAcceleration().y = GRAVITY; // TODO: Centralize gravity
-			setOnGround(false);
-		} else {
-
-			// Small burst for first jetpack-thrust
-			if (jetpack.getEnergy() == jetpack.getMaxEnergy()) {
-				getVelocity().y += 200;
-			}
-			jetpack.setThrusting(true);
-			if (getPosition().y - getHeight() < AAGame.GAME_HEIGHT)
-				getAcceleration().y = jetpack.getThrust();
-			else
-				getAcceleration().y = GRAVITY;
+	public void jetpack() {
+		// Small burst for first jetpack-thrust
+		if (jetpack.getEnergy() == jetpack.getMaxEnergy()) {
+			getVelocity().y += 200;
 		}
+		jetpack.setThrusting(true);
+		if (getPosition().y - getHeight() < AAGame.GAME_HEIGHT)
+			getAcceleration().y = jetpack.getThrust();
+	}
+
+	public void jump() {
+		getVelocity().y = JUMP_VELOCITY;
+		setOnGround(false);
+
 	}
 
 	public void jumpRelease() {
 		if (jetpack.isThrusting()) {
-			getAcceleration().y = GRAVITY;
 			jetpack.setThrusting(false);
+			getAcceleration().y = 0;
 		}
 	}
 
@@ -115,45 +116,30 @@ public class Man extends AbstractGameObject {
 				WIDTH, HEIGHT, 1.0f, 1.0f, getRotation());
 	}
 
+	@Override
 	public void die() {
+		super.die();
+		if (!isOnGround())
+			jumpRelease();
 		getVelocity().x = PlayScreen.getLevelVelocity();
 		PlayScreen.setLevelVelocity(0);
-		frontFlip();
-		getVelocity().y = 200;
-		getAcceleration().y = -300;
-		setDead(true);
-		setOnGround(false);
 	}
 
-	private void frontFlip() {
-		Tween.to(this, GameObjectAccessor.ROTATION, 0).target(0)
-				.start(getParentScreen().getTweenManager());
-		Tween.to(this, GameObjectAccessor.ROTATION, 2f).target(-720)
-				.ease(Quad.IN).start(getParentScreen().getTweenManager());
-	}
-
-	public boolean isOnGround() {
-		return onGround;
-	}
-
-	public void setOnGround(boolean onGround) {
-		this.onGround = onGround;
-	}
-
-	public boolean isDead() {
-		return isDead;
-	}
-
-	public void setDead(boolean isDead) {
-		this.isDead = isDead;
-	}
-
-	public void land() {
+	@Override
+	public void land(GameObject target) {
+		super.land(target);
 		jetpack.setThrusting(false);
 		jetpack.resetCooldown();
-		setOnGround(true);
-		getVelocity().y = 0;
-		getAcceleration().y = 0;
 	}
 
+	public void onClick() {
+		if(isDead())
+			return;
+		if (isOnGround()) {
+			jump();
+		} else {
+			jetpack();
+		}
+
+	}
 }

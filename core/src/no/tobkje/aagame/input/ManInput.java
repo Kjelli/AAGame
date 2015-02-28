@@ -17,7 +17,7 @@ public class ManInput implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
 		case Input.Keys.SPACE:
-			theMan.jump();
+			theMan.onClick();
 			return true;
 		case Input.Keys.D:
 			if (Settings.get("debug", false))
@@ -62,7 +62,7 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		theMan.jump();
+		theMan.onClick();
 		return true;
 	}
 

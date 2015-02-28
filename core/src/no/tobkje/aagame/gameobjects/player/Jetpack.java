@@ -1,7 +1,9 @@
 package no.tobkje.aagame.gameobjects.player;
 
+import no.tobkje.aagame.gameobjects.common.Gravity;
+
 public class Jetpack {
-	private static final float THRUST_INITIAL = 400;
+	private static final float THRUST_INITIAL = 800;
 	private static final float ENERGY_INITIAL = 100;
 
 	private boolean cooldown;
@@ -19,14 +21,13 @@ public class Jetpack {
 	}
 
 	public void update(float delta) {
-		System.out.println(energy);
 		if (cooldown)
 			return;
 		if (energy <= 0) {
-			thrust = Man.GRAVITY;
+			thrust = 0;
 			cooldown = true;
 		} else if (isThrusting) {
-			thrust = THRUST_INITIAL * (energy / ENERGY_INITIAL);
+			thrust = THRUST_INITIAL;
 			energy -= 40.0f * delta;
 		}
 	}

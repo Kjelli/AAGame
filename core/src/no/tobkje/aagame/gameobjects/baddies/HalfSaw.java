@@ -8,7 +8,7 @@ import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class HalfSaw extends AbstractGameObject {
+public class HalfSaw extends AbstractBaddie {
 
 	public static final float WIDTH = 48, HEIGHT = 24;
 	public static final float y = -60 + Ground.HEIGHT;

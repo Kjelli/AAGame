@@ -11,26 +11,33 @@ public class Assets {
 	 */
 
 	public static Texture tilesheet;
+	public static Texture spacesheet;
+	public static Texture starsheet;
+	public static Texture manSheet;
+	public static Texture sawSheet;
+	public static Texture baddies;
+
 	public static TextureRegion ground;
 
-	public static Texture spacesheet;
 	public static TextureRegion space_bg;
 
-	public static Texture starsheet;
 	public static TextureRegion star;
 
-	public static Texture manSheet;
 	public static Animation mAnimation;
 	public static TextureRegion[] man_walk;
 	public static Animation flyAnimation;
 	public static TextureRegion[] man_fly;
 	public static TextureRegion man_fly_nofuel;
 
-	public static Texture sawSheet;
 	public static TextureRegion halfSaw, saw;
+
+	public static Animation baddie_blue_walk_animation;
+	public static TextureRegion baddie_blue_walk[];
+	public static TextureRegion baddie_blue_dead;
 
 	public static void load() {
 		loadBackground();
+		loadPlayer();
 		loadGameObjects();
 	}
 
@@ -48,7 +55,7 @@ public class Assets {
 
 	}
 
-	private static void loadGameObjects() {
+	private static void loadPlayer() {
 		manSheet = new Texture("player.png");
 		man_walk = new TextureRegion[8];
 		for (int i = 0; i < 8; i++) {
@@ -56,7 +63,7 @@ public class Assets {
 		}
 		mAnimation = new Animation(0.10f, man_walk);
 		mAnimation.setPlayMode(Animation.PlayMode.LOOP);
-		
+
 		man_fly = new TextureRegion[3];
 		for (int i = 0; i < 3; i++) {
 			man_fly[i] = loadAndFlip(manSheet, (i) * 16, 16, 16, 16);
@@ -64,11 +71,25 @@ public class Assets {
 		flyAnimation = new Animation(0.10f, man_fly);
 		flyAnimation.setPlayMode(Animation.PlayMode.LOOP);
 		man_fly_nofuel = loadAndFlip(manSheet, 48, 16, 16, 16);
+	}
 
+	private static void loadGameObjects() {
+		// Dodgables
 		sawSheet = new Texture("saw.png");
 		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
 		halfSaw.flip(false, true);
 		saw = loadAndFlip(sawSheet, 0, 0, 400, 400);
+
+		// Baddies
+		baddies = new Texture("baddies.png");
+		baddie_blue_walk = new TextureRegion[6];
+		for (int i = 0; i < 6; i++) {
+			baddie_blue_walk[i] = loadAndFlip(baddies, 0 + i * 16, 12, 16, 15);
+		}
+		baddie_blue_walk_animation = new Animation(0.10f, baddie_blue_walk);
+		baddie_blue_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
+
+		baddie_blue_dead = loadAndFlip(baddies, 48, 0, 16, 15);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -82,5 +103,10 @@ public class Assets {
 		tilesheet.dispose();
 		manSheet.dispose();
 		sawSheet.dispose();
+		spacesheet.dispose();
+		starsheet.dispose();
+		manSheet.dispose();
+		sawSheet.dispose();
+		baddies.dispose();
 	}
 }

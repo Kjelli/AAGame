@@ -1,6 +1,7 @@
 package no.tobkje.aagame.screens;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgrounds.Background;
@@ -20,14 +21,20 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public abstract class AbstractGameScreen implements GameScreen {
 	private Background background;
 	private final ArrayList<GameObject> objects;
+	private final ArrayList<GameObject> addQueue;
+	private final ArrayList<GameObject> removeQueue;
 	private final OrthographicCamera camera;
 	private final SpriteBatch batch;
 	ShapeRenderer sr;
 	private final TweenManager manager;
 
+	private static float runtime = 0;
+
 	private boolean resetFlag = false;
 
 	public AbstractGameScreen() {
+		addQueue = new ArrayList<GameObject>();
+		removeQueue = new ArrayList<GameObject>();
 		objects = new ArrayList<GameObject>();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, AAGame.GAME_WIDTH, AAGame.GAME_HEIGHT);
@@ -54,8 +61,11 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 		manager.update(delta);
 		background.update(delta);
-		update(delta);
+		updateScreen(delta);
+		updateObjects(delta);
 		draw(batch);
+
+		runtime += delta;
 
 		if (Settings.get("debug", false)) {
 			drawDebug(sr);
@@ -88,9 +98,22 @@ public abstract class AbstractGameScreen implements GameScreen {
 		batch.end();
 	}
 
-	private void update(float delta) {
+	protected abstract void updateScreen(float delta);
+
+	private void updateObjects(float delta) {
 		for (GameObject o : objects) {
-			o.update(delta);
+			if (o.getPosition().x > -camera.viewportWidth / 2
+					&& o.getPosition().x <= camera.position.x
+							+ camera.viewportWidth * 1.5)
+				o.update(delta);
+		}
+
+		while (!removeQueue.isEmpty()) {
+			objects.remove(removeQueue.remove(0));
+		}
+
+		while (!addQueue.isEmpty()) {
+			objects.add(addQueue.remove(0));
 		}
 	}
 
@@ -118,9 +141,13 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	}
 
-	protected void spawn(GameObject go) {
-		objects.add(go);
+	public void spawn(GameObject go) {
+		addQueue.add(go);
 		go.setParentScreen(this);
+	}
+
+	public void despawn(GameObject go) {
+		removeQueue.add(go);
 	}
 
 	@Override
@@ -155,6 +182,10 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	public void setBackground(Background background) {
 		this.background = background;
+	}
+
+	public static float getRuntime() {
+		return runtime;
 	}
 
 	@Override

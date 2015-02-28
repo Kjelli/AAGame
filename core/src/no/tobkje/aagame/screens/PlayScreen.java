@@ -3,6 +3,7 @@ package no.tobkje.aagame.screens;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.baddies.HalfSaw;
+import no.tobkje.aagame.gameobjects.baddies.MiniMan;
 import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.input.ManInput;
 
@@ -13,7 +14,6 @@ public class PlayScreen extends AbstractGameScreen {
 
 	public static final float LEVEL_VELOCITY_INITIAL = 105.0f;
 	private static float levelVelocity;
-
 	Man theMan;
 	OrthographicCamera camera;
 
@@ -35,7 +35,7 @@ public class PlayScreen extends AbstractGameScreen {
 	}
 
 	private void initGame() {
-		theMan = new Man(40, 68);
+		theMan = new Man(140, 68);
 
 		for (int i = 0; i <= 10; i++) {
 			spawn(new Ground(Ground.WIDTH * i, -60));
@@ -43,6 +43,7 @@ public class PlayScreen extends AbstractGameScreen {
 		spawn(new HalfSaw(400));
 		// spawn(new HalfSaw(520, -60 + Ground.HEIGHT));
 		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
+
 		spawn(theMan);
 
 		levelVelocity = LEVEL_VELOCITY_INITIAL;
@@ -63,5 +64,13 @@ public class PlayScreen extends AbstractGameScreen {
 
 	public static void setLevelVelocity(float f) {
 		levelVelocity = f;
+	}
+
+	@Override
+	protected void updateScreen(float delta) {
+		if (Math.random() < 0.05f)
+			for (int i = 0; i < 4; i++) {
+				spawn(new MiniMan(500 + 40 * i, 68));
+			}
 	}
 }
