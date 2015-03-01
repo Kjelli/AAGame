@@ -5,6 +5,7 @@ import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.baddies.HalfSaw;
 import no.tobkje.aagame.gameobjects.baddies.MiniManBlue;
+import no.tobkje.aagame.gameobjects.baddies.MiniManGreen;
 import no.tobkje.aagame.gameobjects.baddies.MiniManSpike;
 import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.hud.HudLayer;
@@ -54,9 +55,8 @@ public class PlayScreen extends AbstractGameScreen {
 		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 
 		spawn(theMan);
-		
-		((PlayHud)getHud()).energyBar.bind(theMan.getJetpack());
-		
+
+		((PlayHud) getHud()).energyBar.bind(theMan.getJetpack());
 
 		levelVelocity = LEVEL_VELOCITY_INITIAL;
 	}
@@ -84,6 +84,7 @@ public class PlayScreen extends AbstractGameScreen {
 			spawn(new MiniManBlue(500, 68));
 		else if (Math.random() < 0.005f)
 			spawn(new MiniManSpike(500, 68));
-
+		else if (Math.random() < 0.005f)
+			spawn(new MiniManGreen(500, 68));
 	}
 }

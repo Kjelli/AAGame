@@ -1,9 +1,12 @@
 package no.tobkje.aagame.assets;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class Assets {
 
@@ -32,22 +35,32 @@ public class Assets {
 
 	public static TextureRegion halfSaw, saw;
 
-	public static Animation baddie_blue_walk_animation;
-	public static TextureRegion baddie_blue_walk[];
-	public static TextureRegion baddie_blue_dead;
-	public static Animation baddie_spike_walk_animation;
-	public static TextureRegion baddie_spike_walk[];
-	public static TextureRegion baddie_spike_dead;
+	public static Animation baddie_blue_walk_animation, baddie_green_walk_animation ,baddie_spike_walk_animation;
+	public static TextureRegion[] baddie_blue_walk, baddie_green_walk, baddie_spike_walk;
+	public static TextureRegion baddie_blue_dead, baddie_green_dead, baddie_spike_dead;
 
 	public static Texture fuel_sheet;
 	public static TextureRegion hud_fuel_high, hud_fuel_medium, hud_fuel_low,
-			hud_fuel_frame;
+			hud_fuel_frame, hud_fuel_frame_left_edge, hud_fuel_frame_right_edge;
+
+	public static BitmapFont font16;
 
 	public static void load() {
 		loadBackground();
 		loadPlayer();
 		loadGameObjects();
 		loadHud();
+
+		loadFont();
+	}
+
+	private static void loadFont() {
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
+				Gdx.files.internal("visitor1.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 16;
+		font16 = generator.generateFont(parameter);
+		generator.dispose();
 	}
 
 	private static void loadBackground() {
@@ -106,17 +119,25 @@ public class Assets {
 		}
 		baddie_spike_walk_animation = new Animation(0.15f, baddie_spike_walk);
 		baddie_spike_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
+		
+		baddie_green_walk = new TextureRegion[6];
+		for (int i = 0; i < 6; i++) {
+			baddie_green_walk[i] = loadAndFlip(baddies, 0 + i * 16, 76, 16, 15);
+		}
+		baddie_green_walk_animation = new Animation(0.15f, baddie_green_walk);
+		baddie_green_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
+		
+		baddie_green_dead = loadAndFlip(baddies, 16, 60, 16, 15);
 	}
 
 	private static void loadHud() {
 		fuel_sheet = new Texture("fuel.png");
 		hud_fuel_high = loadAndFlip(fuel_sheet, 0, 0, 8, 8);
-
 		hud_fuel_medium = loadAndFlip(fuel_sheet, 8, 0, 8, 8);
-
 		hud_fuel_low = loadAndFlip(fuel_sheet, 16, 0, 8, 8);
-
 		hud_fuel_frame = loadAndFlip(fuel_sheet, 24, 0, 8, 8);
+		hud_fuel_frame_right_edge = loadAndFlip(fuel_sheet, 32, 0, 4, 8);
+		hud_fuel_frame_left_edge = loadAndFlip(fuel_sheet, 36, 0, 4, 8);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,

@@ -40,12 +40,15 @@ public abstract class AbstractGameScreen implements GameScreen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, AAGame.GAME_WIDTH, AAGame.GAME_HEIGHT);
 		batch = new SpriteBatch();
+
+		batch.enableBlending();
+		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		manager = new TweenManager();
 		Tween.registerAccessor(AbstractGameObject.class,
 				new GameObjectAccessor());
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
-		
+
 	}
 
 	@Override
@@ -97,7 +100,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 			for (GameObject o : objects) {
 				o.draw(batch);
 			}
-			
+
 			hud.render(batch);
 		}
 		batch.end();

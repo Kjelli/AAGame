@@ -8,14 +8,9 @@ import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.screens.PlayScreen;
-import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.equations.Quad;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 
 public class Man extends AbstractGameObject {
 
