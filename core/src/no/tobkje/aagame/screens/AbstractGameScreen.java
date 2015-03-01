@@ -1,12 +1,12 @@
 package no.tobkje.aagame.screens;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
+import no.tobkje.aagame.hud.HudLayer;
 import no.tobkje.aagame.settings.Settings;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.Tween;
@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractGameScreen implements GameScreen {
 	private Background background;
+	private HudLayer hud;
 	private final ArrayList<GameObject> objects;
 	private final ArrayList<GameObject> addQueue;
 	private final ArrayList<GameObject> removeQueue;
@@ -44,6 +45,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 				new GameObjectAccessor());
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
+		
 	}
 
 	@Override
@@ -63,6 +65,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 		background.update(delta);
 		updateScreen(delta);
 		updateObjects(delta);
+		hud.update(delta);
 		draw(batch);
 
 		runtime += delta;
@@ -94,6 +97,8 @@ public abstract class AbstractGameScreen implements GameScreen {
 			for (GameObject o : objects) {
 				o.draw(batch);
 			}
+			
+			hud.render(batch);
 		}
 		batch.end();
 	}
@@ -168,12 +173,19 @@ public abstract class AbstractGameScreen implements GameScreen {
 	private void resetLogic() {
 		resetFlag = false;
 		background.reset();
+		hud.reset();
 		objects.clear();
 		init();
 	}
 
+	public abstract void init();
+
 	protected void initBackground() {
 		background.init();
+	}
+
+	protected void initHud() {
+		hud.init();
 	}
 
 	public TweenManager getTweenManager() {
@@ -182,6 +194,14 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	public void setBackground(Background background) {
 		this.background = background;
+	}
+
+	public void setHud(HudLayer hud) {
+		this.hud = hud;
+	}
+
+	public HudLayer getHud() {
+		return hud;
 	}
 
 	public static float getRuntime() {

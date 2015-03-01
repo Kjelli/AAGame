@@ -142,4 +142,8 @@ public class Man extends AbstractGameObject {
 		}
 
 	}
+
+	public Jetpack getJetpack() {
+		return jetpack;
+	}
 }

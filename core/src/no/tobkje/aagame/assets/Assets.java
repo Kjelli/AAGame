@@ -1,6 +1,7 @@
 package no.tobkje.aagame.assets;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -38,10 +39,15 @@ public class Assets {
 	public static TextureRegion baddie_spike_walk[];
 	public static TextureRegion baddie_spike_dead;
 
+	public static Texture fuel_sheet;
+	public static TextureRegion hud_fuel_high, hud_fuel_medium, hud_fuel_low,
+			hud_fuel_frame;
+
 	public static void load() {
 		loadBackground();
 		loadPlayer();
 		loadGameObjects();
+		loadHud();
 	}
 
 	private static void loadBackground() {
@@ -93,13 +99,24 @@ public class Assets {
 		baddie_blue_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
 		baddie_blue_dead = loadAndFlip(baddies, 48, 0, 16, 15);
-		
+
 		baddie_spike_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
 			baddie_spike_walk[i] = loadAndFlip(baddies, 0 + i * 16, 44, 16, 15);
 		}
 		baddie_spike_walk_animation = new Animation(0.15f, baddie_spike_walk);
 		baddie_spike_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
+	}
+
+	private static void loadHud() {
+		fuel_sheet = new Texture("fuel.png");
+		hud_fuel_high = loadAndFlip(fuel_sheet, 0, 0, 8, 8);
+
+		hud_fuel_medium = loadAndFlip(fuel_sheet, 8, 0, 8, 8);
+
+		hud_fuel_low = loadAndFlip(fuel_sheet, 16, 0, 8, 8);
+
+		hud_fuel_frame = loadAndFlip(fuel_sheet, 24, 0, 8, 8);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -118,5 +135,6 @@ public class Assets {
 		manSheet.dispose();
 		sawSheet.dispose();
 		baddies.dispose();
+		fuel_sheet.dispose();
 	}
 }

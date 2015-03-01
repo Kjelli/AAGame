@@ -1,11 +1,14 @@
 package no.tobkje.aagame.screens;
 
+import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.baddies.HalfSaw;
 import no.tobkje.aagame.gameobjects.baddies.MiniManBlue;
 import no.tobkje.aagame.gameobjects.baddies.MiniManSpike;
 import no.tobkje.aagame.gameobjects.player.Man;
+import no.tobkje.aagame.hud.HudLayer;
+import no.tobkje.aagame.hud.PlayHud;
 import no.tobkje.aagame.input.ManInput;
 
 import com.badlogic.gdx.Gdx;
@@ -20,7 +23,11 @@ public class PlayScreen extends AbstractGameScreen {
 
 	public PlayScreen() {
 		super();
-		setBackground(new PlayBackground());
+
+		Background background = new PlayBackground();
+		setBackground(background);
+		HudLayer playHud = new PlayHud();
+		setHud(playHud);
 	}
 
 	@Override
@@ -31,6 +38,7 @@ public class PlayScreen extends AbstractGameScreen {
 	@Override
 	public void init() {
 		initBackground();
+		initHud();
 		initGame();
 		initInput();
 	}
@@ -46,6 +54,9 @@ public class PlayScreen extends AbstractGameScreen {
 		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 
 		spawn(theMan);
+		
+		((PlayHud)getHud()).energyBar.bind(theMan.getJetpack());
+		
 
 		levelVelocity = LEVEL_VELOCITY_INITIAL;
 	}
@@ -71,7 +82,7 @@ public class PlayScreen extends AbstractGameScreen {
 	protected void updateScreen(float delta) {
 		if (Math.random() < 0.005f)
 			spawn(new MiniManBlue(500, 68));
-		else if(Math.random() < 0.005f)
+		else if (Math.random() < 0.005f)
 			spawn(new MiniManSpike(500, 68));
 
 	}
