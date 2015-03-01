@@ -34,7 +34,8 @@ public class EnergyBar extends AbstractHudElement {
 		batch.draw(tx, getPosition().x, getPosition().y, drawWidth, getHeight());
 		batch.draw(Assets.hud_fuel_frame, getPosition().x, getPosition().y,
 				getWidth(), getHeight());
-		batch.draw(Assets.hud_fuel_frame_left_edge, getPosition().x - 8, getPosition().y, 8, getHeight());
+		batch.draw(Assets.hud_fuel_frame_left_edge, getPosition().x - 8,
+				getPosition().y, 8, getHeight());
 		batch.draw(Assets.hud_fuel_frame_right_edge, getPosition().x
 				+ getWidth(), getPosition().y, 8, getHeight());
 		Assets.font16.draw(batch, "Fuel", getPosition().x, getPosition().y
@@ -47,7 +48,6 @@ public class EnergyBar extends AbstractHudElement {
 			return;
 		float targetX = Math.max(jetpack.getEnergy() / jetpack.getMaxEnergy()
 				* getWidth(), 0);
-		setWidth(getWidth()+0.01f);
 		drawWidth = (drawWidth * 8.5f + targetX * 1.5f) / 10;
 	}
 

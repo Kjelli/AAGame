@@ -8,14 +8,14 @@ import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.screens.PlayScreen;
 
-public abstract class AbstractMiniMan extends AbstractBaddie {
+public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan {
 	public static final float WIDTH = 32, HEIGHT = 32;
 	private CollisionListener minimanlistener;
-	private double scale;
+	private float scale;
 
 	public AbstractMiniMan(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
-		setScale(Math.random() * 2 + 1);
+		setScale((float) (Math.random() * 0.2f + 1));
 		setWidth((float) (WIDTH * getScale()));
 		setHeight((float) (HEIGHT * getScale()));
 		minimanlistener = new MiniManCollisionListener();
@@ -38,11 +38,11 @@ public abstract class AbstractMiniMan extends AbstractBaddie {
 			getParentScreen().despawn(this);
 	}
 
-	public double getScale() {
+	public float getScale() {
 		return scale;
 	}
 
-	public void setScale(double random) {
+	public void setScale(float random) {
 		this.scale = random;
 	}
 
