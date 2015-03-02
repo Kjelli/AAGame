@@ -15,7 +15,7 @@ public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan 
 
 	public AbstractMiniMan(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
-		setScale((float) (Math.random() * 0.2f + 1));
+		setScale((float) (Math.random() * 2f + 1));
 		setWidth((float) (WIDTH * getScale()));
 		setHeight((float) (HEIGHT * getScale()));
 		minimanlistener = new MiniManCollisionListener();

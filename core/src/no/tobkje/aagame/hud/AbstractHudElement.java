@@ -1,7 +1,5 @@
 package no.tobkje.aagame.hud;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 
 public abstract class AbstractHudElement extends AbstractGameObject implements
