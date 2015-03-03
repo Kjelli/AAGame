@@ -4,11 +4,11 @@ import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.Ground;
-import no.tobkje.aagame.gameobjects.baddies.HalfSaw;
-import no.tobkje.aagame.gameobjects.baddies.MiniMan;
+import no.tobkje.aagame.gameobjects.baddies.Baddie;
 import no.tobkje.aagame.gameobjects.baddies.MiniManBlue;
 import no.tobkje.aagame.gameobjects.baddies.MiniManGreen;
 import no.tobkje.aagame.gameobjects.baddies.MiniManSpike;
+import no.tobkje.aagame.gameobjects.baddies.Spike;
 import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.hud.HudLayer;
 import no.tobkje.aagame.hud.PlayHud;
@@ -52,9 +52,6 @@ public class PlayScreen extends AbstractGameScreen {
 		for (int i = 0; i <= 10; i++) {
 			spawn(new Ground(Ground.WIDTH * i, -60));
 		}
-		spawn(new HalfSaw(400));
-		// spawn(new HalfSaw(520, -60 + Ground.HEIGHT));
-		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 
 		spawn(theMan);
 
@@ -80,16 +77,20 @@ public class PlayScreen extends AbstractGameScreen {
 		levelVelocity = f;
 	}
 
+	static float spawnX = 550, spawnY = 68;
+
 	@Override
 	protected void updateScreen(float delta) {
-		MiniMan newb = null;
+		Baddie newb = null;
 		if (Math.random() < 0.005f)
-			newb = new MiniManBlue(500, 68);
+			newb = new MiniManBlue(spawnX, spawnY);
 		else if (Math.random() < 0.005f)
-			newb = new MiniManSpike(500, 68);
+			newb = new MiniManSpike(spawnX, spawnY);
 		else if (Math.random() < 0.005f)
-			newb = new MiniManGreen(500, 68);
-		
+			newb = new MiniManGreen(spawnX, spawnY);
+		else if (Math.random() < 0.005f)
+			newb = new Spike(spawnX, spawnY);
+
 		if (newb != null)
 			spawn((GameObject) newb);
 	}

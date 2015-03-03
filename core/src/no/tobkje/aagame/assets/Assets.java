@@ -18,7 +18,6 @@ public class Assets {
 	public static Texture spacesheet;
 	public static Texture starsheet;
 	public static Texture manSheet;
-	public static Texture sawSheet;
 	public static Texture baddies;
 
 	public static TextureRegion ground;
@@ -33,15 +32,19 @@ public class Assets {
 	public static TextureRegion[] man_fly;
 	public static TextureRegion man_fly_nofuel;
 
-	public static TextureRegion halfSaw, saw;
+	public static TextureRegion spike;
 
-	public static Animation baddie_blue_walk_animation, baddie_green_walk_animation ,baddie_spike_walk_animation;
-	public static TextureRegion[] baddie_blue_walk, baddie_green_walk, baddie_spike_walk;
-	public static TextureRegion baddie_blue_dead, baddie_green_dead, baddie_spike_dead;
+	public static Animation baddie_blue_walk_animation,
+			baddie_green_walk_animation, baddie_spike_walk_animation;
+	public static TextureRegion[] baddie_blue_walk, baddie_green_walk,
+			baddie_spike_walk;
+	public static TextureRegion baddie_blue_dead, baddie_green_dead,
+			baddie_spike_dead;
 
 	public static Texture fuel_sheet;
 	public static TextureRegion hud_fuel_high, hud_fuel_medium, hud_fuel_low,
-			hud_fuel_frame, hud_fuel_frame_left_edge, hud_fuel_frame_right_edge;
+			hud_fuel_frame, hud_fuel_frame_left_edge,
+			hud_fuel_frame_right_edge;
 
 	public static BitmapFont font16;
 
@@ -96,11 +99,7 @@ public class Assets {
 	}
 
 	private static void loadGameObjects() {
-		// Dodgables
-		sawSheet = new Texture("saw.png");
-		halfSaw = loadAndFlip(sawSheet, 0, 200, 400, 200);
-		halfSaw.flip(false, true);
-		saw = loadAndFlip(sawSheet, 0, 0, 400, 400);
+		spike = loadAndFlip(tilesheet, 160, 0, 80, 80);
 
 		// Baddies
 		baddies = new Texture("baddies.png");
@@ -119,14 +118,14 @@ public class Assets {
 		}
 		baddie_spike_walk_animation = new Animation(0.15f, baddie_spike_walk);
 		baddie_spike_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
-		
+
 		baddie_green_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
 			baddie_green_walk[i] = loadAndFlip(baddies, 0 + i * 16, 76, 16, 15);
 		}
 		baddie_green_walk_animation = new Animation(0.15f, baddie_green_walk);
 		baddie_green_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
-		
+
 		baddie_green_dead = loadAndFlip(baddies, 16, 60, 16, 15);
 	}
 
@@ -150,11 +149,9 @@ public class Assets {
 	public static void dispose() {
 		tilesheet.dispose();
 		manSheet.dispose();
-		sawSheet.dispose();
 		spacesheet.dispose();
 		starsheet.dispose();
 		manSheet.dispose();
-		sawSheet.dispose();
 		baddies.dispose();
 		fuel_sheet.dispose();
 	}
