@@ -19,8 +19,10 @@ public class Assets {
 	public static Texture starSheet;
 	public static Texture manSheet;
 	public static Texture baddieSheet;
-
+	public static Texture fuelSheet;
 	public static Texture splashSheet;
+	public static Texture particleSmokeSheet;
+
 	public static TextureRegion splash;
 
 	public static TextureRegion ground;
@@ -35,6 +37,8 @@ public class Assets {
 
 	public static TextureRegion spike;
 
+	public static TextureRegion smoke;
+
 	public static Animation baddie_blue_walk_animation,
 			baddie_green_walk_animation, baddie_spike_walk_animation;
 	public static TextureRegion[] baddie_blue_walk, baddie_green_walk,
@@ -42,7 +46,6 @@ public class Assets {
 	public static TextureRegion baddie_blue_dead, baddie_green_dead,
 			baddie_spike_dead;
 
-	public static Texture fuelSheet;
 	public static TextureRegion hud_fuel_high, hud_fuel_medium, hud_fuel_low,
 			hud_fuel_frame, hud_fuel_frame_left_edge,
 			hud_fuel_frame_right_edge;
@@ -50,17 +53,23 @@ public class Assets {
 	public static BitmapFont font16;
 
 	public static void load() {
-		loadSplash();
 
 		loadBackground();
 		loadPlayer();
 		loadGameObjects();
+		loadParticles();
+
 		loadHud();
 
 		loadFont();
 	}
 
-	private static void loadSplash() {
+	private static void loadParticles() {
+		particleSmokeSheet = new Texture("smoke.png");
+		smoke = loadAndFlip(particleSmokeSheet, 0, 0, 16, 16);
+	}
+
+	public static void loadSplash() {
 		splashSheet = new Texture("kjelli.png");
 		splash = new TextureRegion(splashSheet, 0, 0, splashSheet.getWidth(),
 				splashSheet.getHeight());

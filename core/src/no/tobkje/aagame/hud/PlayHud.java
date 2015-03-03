@@ -7,7 +7,7 @@ public class PlayHud extends AbstractHudLayer {
 
 	@Override
 	public void init() {
-		energyBar = new EnergyBar(40, AAGame.GAME_HEIGHT - 40);
+		energyBar = new EnergyBar(this, 40, AAGame.GAME_HEIGHT - 40);
 		addHudElement(energyBar);
 	}
 

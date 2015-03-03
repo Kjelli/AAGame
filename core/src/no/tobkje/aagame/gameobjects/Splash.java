@@ -23,7 +23,6 @@ public class Splash extends AbstractGameObject {
 
 	@Override
 	public void update(float delta) {
-		System.out.println(color.a);
 	}
 	
 	public Color getColor(){

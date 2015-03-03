@@ -20,10 +20,10 @@ public class ManInput implements InputProcessor {
 			theMan.onClick();
 			return true;
 		case Input.Keys.D:
-			if (Settings.get("debug", false))
-				Settings.put("debug", false);
+			if (Settings.get("debug_draw", false))
+				Settings.put("debug_draw", false);
 			else
-				Settings.put("debug", true);
+				Settings.put("debug_draw", true);
 			return true;
 		case Input.Keys.S:
 			if (Settings.get("slow", false))

@@ -6,19 +6,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractHudLayer implements HudLayer {
 	private final ArrayList<HudElement> elements;
+	private final ArrayList<HudElement> addQueue;
+	private final ArrayList<HudElement> removeQueue;
 
 	public AbstractHudLayer() {
 		elements = new ArrayList<HudElement>();
+		addQueue = new ArrayList<HudElement>();
+		removeQueue = new ArrayList<HudElement>();
 	}
 
 	@Override
 	public void addHudElement(HudElement element) {
-		elements.add(element);
+		addQueue.add(element);
 	}
 
 	@Override
 	public void removeHudElement(HudElement element) {
-		elements.remove(element);
+		removeQueue.add(element);
 	}
 
 	@Override
@@ -34,7 +38,12 @@ public abstract class AbstractHudLayer implements HudLayer {
 		for (HudElement element : elements) {
 			element.update(delta);
 		}
-
+		while (!addQueue.isEmpty()) {
+			elements.add(addQueue.remove(0));
+		}
+		while (!removeQueue.isEmpty()) {
+			elements.remove(removeQueue.remove(0));
+		}
 	}
 
 	@Override
@@ -43,7 +52,7 @@ public abstract class AbstractHudLayer implements HudLayer {
 			element.draw(batch);
 		}
 	}
-	
+
 	@Override
 	public void reset() {
 		clear();

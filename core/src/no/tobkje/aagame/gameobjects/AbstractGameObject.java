@@ -158,13 +158,10 @@ public abstract class AbstractGameObject implements GameObject {
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-	
-	
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
+		getParentScreen().despawn(this);
 	}
 
 	@Override

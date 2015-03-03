@@ -30,7 +30,7 @@ public class Man extends AbstractGameObject {
 		getOrigin().x = WIDTH / 2;
 		getOrigin().y = HEIGHT / 4;
 
-		jetpack = new Jetpack();
+		jetpack = new Jetpack(this);
 	}
 
 	@Override

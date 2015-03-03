@@ -79,7 +79,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 		runtime += delta;
 
-		if (Settings.get("debug", false)) {
+		if (Settings.get("debug_draw", false)) {
 			drawDebug(sr);
 		}
 	}

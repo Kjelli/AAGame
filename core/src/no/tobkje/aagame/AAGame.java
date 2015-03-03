@@ -1,7 +1,7 @@
 package no.tobkje.aagame;
 
 import no.tobkje.aagame.screens.SplashScreen;
-
+import no.tobkje.aagame.settings.Settings;
 import no.tobkje.aagame.assets.Assets;
 
 import com.badlogic.gdx.Game;
@@ -19,7 +19,7 @@ public class AAGame extends Game {
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
 		GAME_HEIGHT = SCREEN_HEIGHT / (SCREEN_WIDTH / GAME_WIDTH);
-		Assets.load();
+		Settings.put("debug", true);
 		setScreen(new SplashScreen(this));
 	}
 

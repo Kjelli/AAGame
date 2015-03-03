@@ -10,10 +10,10 @@ public class EnergyBar extends AbstractHudElement {
 	private Jetpack jetpack;
 	private static final float MAX_WIDTH = 120;
 
-	private float drawWidth;
+	private float drawWidth = MAX_WIDTH;
 
-	public EnergyBar(float x, float y) {
-		super(x, y, MAX_WIDTH, 16);
+	public EnergyBar(HudLayer hudLayer, float x, float y) {
+		super(hudLayer, x, y, MAX_WIDTH, 16);
 	}
 
 	@Override
