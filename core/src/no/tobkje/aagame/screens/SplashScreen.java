@@ -1,20 +1,17 @@
 package no.tobkje.aagame.screens;
 
+import no.tobkje.aagame.AAGame;
+import no.tobkje.aagame.backgrounds.SplashBackground;
+import no.tobkje.aagame.gameobjects.Splash;
+import no.tobkje.aagame.tweenaccessors.ColorAccessor;
+import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-
-import no.tobkje.aagame.AAGame;
-import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.backgrounds.SplashBackground;
-import no.tobkje.aagame.gameobjects.Splash;
-import no.tobkje.aagame.tweenaccessors.ColorAccessor;
-import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 
 public class SplashScreen extends AbstractGameScreen {
 	public Splash splash;
@@ -41,7 +38,7 @@ public class SplashScreen extends AbstractGameScreen {
 	public void init() {
 
 		setBackground(new SplashBackground());
-		splash = new Splash(AAGame.GAME_WIDTH / 4 - 40, AAGame.GAME_HEIGHT / 2
+		splash = new Splash(AAGame.GAME_WIDTH / 4, AAGame.GAME_HEIGHT / 2
 				- AAGame.GAME_WIDTH / 4, AAGame.GAME_WIDTH / 2,
 				AAGame.GAME_WIDTH / 2);
 
@@ -63,8 +60,6 @@ public class SplashScreen extends AbstractGameScreen {
 								game.setScreen(new PlayScreen());
 							}
 						}))
-				.push(Tween.to(splash, GameObjectAccessor.POSITION_X, 6)
-						.target(AAGame.GAME_WIDTH / 4 + 40))
 				.start(getTweenManager());
 	}
 
