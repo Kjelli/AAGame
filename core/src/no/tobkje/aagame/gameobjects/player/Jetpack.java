@@ -1,6 +1,5 @@
 package no.tobkje.aagame.gameobjects.player;
 
-import no.tobkje.aagame.gameobjects.common.Gravity;
 
 public class Jetpack {
 	private static final float THRUST_INITIAL = 800;

@@ -3,9 +3,6 @@ package no.tobkje.aagame.hud;
 import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.gameobjects.player.Jetpack;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

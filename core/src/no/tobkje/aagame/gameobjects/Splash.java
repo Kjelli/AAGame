@@ -1,11 +1,6 @@
 package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.assets.Assets;
-import no.tobkje.aagame.tweenaccessors.ColorAccessor;
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

@@ -3,7 +3,6 @@ package no.tobkje.aagame.backgrounds;
 import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgroundobjects.SpaceImage;
 import no.tobkje.aagame.backgroundobjects.Star;
-import no.tobkje.aagame.screens.GameScreen;
 
 public class PlayBackground extends AbstractBackground {
 	public static final int LAYER_COUNT = 4;

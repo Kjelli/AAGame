@@ -2,10 +2,8 @@ package no.tobkje.aagame.gameobjects;
 
 import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.GameScreen;
-import no.tobkje.aagame.screens.PlayScreen;
 import no.tobkje.aagame.tweens.GameObjectTweens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

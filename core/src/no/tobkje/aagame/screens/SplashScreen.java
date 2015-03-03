@@ -4,7 +4,6 @@ import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgrounds.SplashBackground;
 import no.tobkje.aagame.gameobjects.Splash;
 import no.tobkje.aagame.tweenaccessors.ColorAccessor;
-import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;

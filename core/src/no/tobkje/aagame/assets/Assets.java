@@ -1,7 +1,5 @@
 package no.tobkje.aagame.assets;
 
-import java.awt.BufferCapabilities.FlipContents;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -53,7 +51,7 @@ public class Assets {
 
 	public static void load() {
 		loadSplash();
-		
+
 		loadBackground();
 		loadPlayer();
 		loadGameObjects();

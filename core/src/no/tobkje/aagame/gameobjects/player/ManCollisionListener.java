@@ -1,7 +1,6 @@
 package no.tobkje.aagame.gameobjects.player;
 
 import no.tobkje.aagame.collisions.CollisionListener;
-import no.tobkje.aagame.collisions.CollisionTest;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.baddies.Baddie;

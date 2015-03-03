@@ -1,9 +1,8 @@
 package no.tobkje.aagame.tweenaccessors;
 
-import com.badlogic.gdx.graphics.Color;
-
-import no.tobkje.aagame.gameobjects.GameObject;
 import aurelienribon.tweenengine.TweenAccessor;
+
+import com.badlogic.gdx.graphics.Color;
 
 public class ColorAccessor implements TweenAccessor<Color> {
 	public static final int COLOR_RGBA = 1;
