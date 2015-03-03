@@ -52,7 +52,7 @@ public class PlayScreen extends AbstractGameScreen {
 		for (int i = 0; i <= 10; i++) {
 			spawn(new Ground(Ground.WIDTH * i, -60));
 		}
-		spawn(new HalfSaw(400));
+		// spawn(new HalfSaw(400));
 		// spawn(new HalfSaw(520, -60 + Ground.HEIGHT));
 		// spawn(new HalfSaw(640, -60 + Ground.HEIGHT));
 
@@ -83,11 +83,11 @@ public class PlayScreen extends AbstractGameScreen {
 	@Override
 	protected void updateScreen(float delta) {
 		MiniMan newb = null;
-		if (Math.random() < 0.05f)
+		if (Math.random() < 0.005f)
 			newb = new MiniManBlue(500, 68);
-		else if (Math.random() < 0.05f)
+		else if (Math.random() < 0.005f)
 			newb = new MiniManSpike(500, 68);
-		else if (Math.random() < 0.05f)
+		else if (Math.random() < 0.005f)
 			newb = new MiniManGreen(500, 68);
 		if (newb != null)
 			spawn((GameObject) newb);
