@@ -16,13 +16,20 @@ public class SpaceImage extends AbstractBackgroundObject {
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(Assets.space_bg, getPosition().x, getPosition().y, WIDTH, HEIGHT);
+		batch.draw(Assets.space_bg, getPosition().x, getPosition().y, WIDTH,
+				HEIGHT);
 	}
 
 	@Override
 	public void update(float delta) {
 		getVelocity().x = -PlayScreen.getLevelVelocity();
 		move(delta);
+	}
+
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

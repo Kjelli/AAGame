@@ -58,4 +58,9 @@ public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan 
 		}
 
 	}
+	
+	@Override
+	public void onSpawn() {
+		//TODO
+	}
 }

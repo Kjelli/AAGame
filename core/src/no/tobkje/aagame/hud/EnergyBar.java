@@ -54,5 +54,11 @@ public class EnergyBar extends AbstractHudElement {
 	public void bind(Jetpack jetpack) {
 		this.jetpack = jetpack;
 	}
+	
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

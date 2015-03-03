@@ -8,11 +8,13 @@ import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.hud.HudLayer;
 import no.tobkje.aagame.settings.Settings;
+import no.tobkje.aagame.tweenaccessors.ColorAccessor;
 import no.tobkje.aagame.tweenaccessors.GameObjectAccessor;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,8 +46,10 @@ public abstract class AbstractGameScreen implements GameScreen {
 		batch.enableBlending();
 		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		manager = new TweenManager();
+		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(AbstractGameObject.class,
 				new GameObjectAccessor());
+		Tween.registerAccessor(Color.class, new ColorAccessor());
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
 
@@ -65,10 +69,12 @@ public abstract class AbstractGameScreen implements GameScreen {
 		}
 
 		manager.update(delta);
-		background.update(delta);
+		if (background != null)
+			background.update(delta);
 		updateScreen(delta);
 		updateObjects(delta);
-		hud.update(delta);
+		if (hud != null)
+			hud.update(delta);
 		draw(batch);
 
 		runtime += delta;
@@ -87,21 +93,26 @@ public abstract class AbstractGameScreen implements GameScreen {
 	}
 
 	private void draw(SpriteBatch batch) {
-		Gdx.gl.glClearColor(0, 0.0f, 0, 1);
+		if (background != null) {
+			Color c = background.getColor();
+			Gdx.gl.glClearColor(c.r, c.g, c.b, c.a);
+		} else {
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
 		{
 			camera.update();
 			batch.setProjectionMatrix(camera.combined);
-
-			background.render(batch);
+			if (background != null)
+				background.render(batch);
 
 			for (GameObject o : objects) {
 				o.draw(batch);
 			}
-
-			hud.render(batch);
+			if (hud != null)
+				hud.render(batch);
 		}
 		batch.end();
 	}
@@ -152,6 +163,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 	public void spawn(GameObject go) {
 		addQueue.add(go);
 		go.setParentScreen(this);
+		go.onSpawn();
 	}
 
 	public void despawn(GameObject go) {

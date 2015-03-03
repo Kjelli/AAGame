@@ -8,8 +8,6 @@ import no.tobkje.aagame.screens.GameScreen;
 public class PlayBackground extends AbstractBackground {
 	public static final int LAYER_COUNT = 4;
 
-	GameScreen parentScreen;
-
 	Layer backestest;
 	Layer backest;
 	Layer backer;
@@ -38,10 +36,5 @@ public class PlayBackground extends AbstractBackground {
 			l.spawn(new Star((float) Math.random() * AAGame.GAME_WIDTH,
 					(float) Math.random() * AAGame.GAME_HEIGHT));
 		}
-	}
-
-	@Override
-	public GameScreen getParentScreen() {
-		return parentScreen;
 	}
 }

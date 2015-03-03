@@ -39,4 +39,10 @@ public class Spike extends AbstractBaddie {
 		}
 	}
 
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

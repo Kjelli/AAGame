@@ -128,7 +128,7 @@ public class Man extends AbstractGameObject {
 	}
 
 	public void onClick() {
-		if(isDead())
+		if (isDead())
 			return;
 		if (isOnGround()) {
 			jump();
@@ -141,4 +141,11 @@ public class Man extends AbstractGameObject {
 	public Jetpack getJetpack() {
 		return jetpack;
 	}
+
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -159,4 +159,9 @@ public interface GameObject {
 	 * @return boolean indicating death
 	 */
 	public boolean isDead();
+	
+	/**
+	 * Method run when object is added to the gameworld. Somewhat like a constructor.
+	 */
+	public void onSpawn();
 }

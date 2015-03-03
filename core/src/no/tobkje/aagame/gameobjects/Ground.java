@@ -28,5 +28,10 @@ public class Ground extends AbstractGameObject {
 		batch.draw(Assets.ground, Math.round(getPosition().x),
 				Math.round(getPosition().y), WIDTH, HEIGHT);
 	}
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

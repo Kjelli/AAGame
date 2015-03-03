@@ -1,5 +1,7 @@
 package no.tobkje.aagame.assets;
 
+import java.awt.BufferCapabilities.FlipContents;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -14,16 +16,17 @@ public class Assets {
 	 * TextureRegion (0, 0) starts in TOP LEFT corner of the .png file.
 	 */
 
-	public static Texture tilesheet;
+	public static Texture tileSheet;
 	public static Texture spacesheet;
-	public static Texture starsheet;
+	public static Texture starSheet;
 	public static Texture manSheet;
-	public static Texture baddies;
+	public static Texture baddieSheet;
+
+	public static Texture splashSheet;
+	public static TextureRegion splash;
 
 	public static TextureRegion ground;
-
 	public static TextureRegion space_bg;
-
 	public static TextureRegion star;
 
 	public static Animation mAnimation;
@@ -41,7 +44,7 @@ public class Assets {
 	public static TextureRegion baddie_blue_dead, baddie_green_dead,
 			baddie_spike_dead;
 
-	public static Texture fuel_sheet;
+	public static Texture fuelSheet;
 	public static TextureRegion hud_fuel_high, hud_fuel_medium, hud_fuel_low,
 			hud_fuel_frame, hud_fuel_frame_left_edge,
 			hud_fuel_frame_right_edge;
@@ -49,12 +52,20 @@ public class Assets {
 	public static BitmapFont font16;
 
 	public static void load() {
+		loadSplash();
+		
 		loadBackground();
 		loadPlayer();
 		loadGameObjects();
 		loadHud();
 
 		loadFont();
+	}
+
+	private static void loadSplash() {
+		splashSheet = new Texture("kjelli.png");
+		splash = new TextureRegion(splashSheet, 0, 0, splashSheet.getWidth(),
+				splashSheet.getHeight());
 	}
 
 	private static void loadFont() {
@@ -67,16 +78,16 @@ public class Assets {
 	}
 
 	private static void loadBackground() {
-		tilesheet = new Texture("tiles_1.png");
-		ground = loadAndFlip(tilesheet, 0, 160, 80, 160);
+		tileSheet = new Texture("tiles_1.png");
+		ground = loadAndFlip(tileSheet, 0, 160, 80, 160);
 
 		spacesheet = new Texture("space-1.png");
 		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
 				spacesheet.getHeight());
 
-		starsheet = new Texture("star.png");
-		star = loadAndFlip(starsheet, 0, 0, starsheet.getWidth(),
-				starsheet.getHeight());
+		starSheet = new Texture("star.png");
+		star = loadAndFlip(starSheet, 0, 0, starSheet.getWidth(),
+				starSheet.getHeight());
 
 	}
 
@@ -99,44 +110,47 @@ public class Assets {
 	}
 
 	private static void loadGameObjects() {
-		spike = loadAndFlip(tilesheet, 160, 0, 80, 80);
+		spike = loadAndFlip(tileSheet, 160, 0, 80, 80);
 
 		// Baddies
-		baddies = new Texture("baddies.png");
+		baddieSheet = new Texture("baddies.png");
 		baddie_blue_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
-			baddie_blue_walk[i] = loadAndFlip(baddies, 0 + i * 16, 12, 16, 15);
+			baddie_blue_walk[i] = loadAndFlip(baddieSheet, 0 + i * 16, 12, 16,
+					15);
 		}
 		baddie_blue_walk_animation = new Animation(0.15f, baddie_blue_walk);
 		baddie_blue_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
-		baddie_blue_dead = loadAndFlip(baddies, 48, 0, 16, 15);
+		baddie_blue_dead = loadAndFlip(baddieSheet, 48, 0, 16, 15);
 
 		baddie_spike_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
-			baddie_spike_walk[i] = loadAndFlip(baddies, 0 + i * 16, 44, 16, 15);
+			baddie_spike_walk[i] = loadAndFlip(baddieSheet, 0 + i * 16, 44, 16,
+					15);
 		}
 		baddie_spike_walk_animation = new Animation(0.15f, baddie_spike_walk);
 		baddie_spike_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
 		baddie_green_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
-			baddie_green_walk[i] = loadAndFlip(baddies, 0 + i * 16, 76, 16, 15);
+			baddie_green_walk[i] = loadAndFlip(baddieSheet, 0 + i * 16, 76, 16,
+					15);
 		}
 		baddie_green_walk_animation = new Animation(0.15f, baddie_green_walk);
 		baddie_green_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
-		baddie_green_dead = loadAndFlip(baddies, 16, 60, 16, 15);
+		baddie_green_dead = loadAndFlip(baddieSheet, 16, 60, 16, 15);
 	}
 
 	private static void loadHud() {
-		fuel_sheet = new Texture("fuel.png");
-		hud_fuel_high = loadAndFlip(fuel_sheet, 0, 0, 8, 8);
-		hud_fuel_medium = loadAndFlip(fuel_sheet, 8, 0, 8, 8);
-		hud_fuel_low = loadAndFlip(fuel_sheet, 16, 0, 8, 8);
-		hud_fuel_frame = loadAndFlip(fuel_sheet, 24, 0, 8, 8);
-		hud_fuel_frame_right_edge = loadAndFlip(fuel_sheet, 32, 0, 4, 8);
-		hud_fuel_frame_left_edge = loadAndFlip(fuel_sheet, 36, 0, 4, 8);
+		fuelSheet = new Texture("fuel.png");
+		hud_fuel_high = loadAndFlip(fuelSheet, 0, 0, 8, 8);
+		hud_fuel_medium = loadAndFlip(fuelSheet, 8, 0, 8, 8);
+		hud_fuel_low = loadAndFlip(fuelSheet, 16, 0, 8, 8);
+		hud_fuel_frame = loadAndFlip(fuelSheet, 24, 0, 8, 8);
+		hud_fuel_frame_right_edge = loadAndFlip(fuelSheet, 32, 0, 4, 8);
+		hud_fuel_frame_left_edge = loadAndFlip(fuelSheet, 36, 0, 4, 8);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -147,12 +161,28 @@ public class Assets {
 	}
 
 	public static void dispose() {
-		tilesheet.dispose();
-		manSheet.dispose();
-		spacesheet.dispose();
-		starsheet.dispose();
-		manSheet.dispose();
-		baddies.dispose();
-		fuel_sheet.dispose();
+		if (splashSheet != null) {
+			splashSheet.dispose();
+		}
+		if (tileSheet != null)
+			tileSheet.dispose();
+
+		if (manSheet != null)
+			manSheet.dispose();
+
+		if (spacesheet != null)
+			spacesheet.dispose();
+
+		if (starSheet != null)
+			starSheet.dispose();
+
+		if (manSheet != null)
+			manSheet.dispose();
+
+		if (baddieSheet != null)
+			baddieSheet.dispose();
+
+		if (fuelSheet != null)
+			fuelSheet.dispose();
 	}
 }
