@@ -1,9 +1,9 @@
 package no.tobkje.aagame.gameobjects.player;
 
-import no.tobkje.aagame.AAGame;
+import no.tobkje.aagame.gameobjects.common.Gravity;
 
 public class Jetpack {
-	private static final float THRUST_INITIAL = 400;
+	private static final float THRUST_INITIAL = 800;
 	private static final float ENERGY_INITIAL = 100;
 
 	private boolean cooldown;
@@ -11,10 +11,7 @@ public class Jetpack {
 	private float energy;
 	private float thrust;
 
-	private final Man man;
-
-	public Jetpack(Man man) {
-		this.man = man;
+	public Jetpack() {
 		energy = ENERGY_INITIAL;
 		thrust = THRUST_INITIAL;
 	}
@@ -24,13 +21,13 @@ public class Jetpack {
 	}
 
 	public void update(float delta) {
-		if(cooldown)
+		if (cooldown)
 			return;
 		if (energy <= 0) {
-			thrust = Man.GRAVITY;
+			thrust = 0;
 			cooldown = true;
-		} else {
-			thrust = THRUST_INITIAL * (energy / ENERGY_INITIAL);
+		} else if (isThrusting) {
+			thrust = THRUST_INITIAL;
 			energy -= 40.0f * delta;
 		}
 	}
@@ -38,9 +35,22 @@ public class Jetpack {
 	public void setThrusting(boolean isThrusting) {
 		this.isThrusting = isThrusting;
 	}
-	
-	public void resetCooldown(){
+
+	public boolean isThrusting() {
+		return isThrusting;
+	}
+
+	public void resetCooldown() {
 		cooldown = false;
 		energy = ENERGY_INITIAL;
 	}
+
+	public float getEnergy() {
+		return energy;
+	}
+
+	public float getMaxEnergy() {
+		return ENERGY_INITIAL;
+	}
+
 }

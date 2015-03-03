@@ -1,9 +1,11 @@
 package no.tobkje.aagame.gameobjects.player;
 
 import no.tobkje.aagame.collisions.CollisionListener;
+import no.tobkje.aagame.collisions.CollisionTest;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.Ground;
-import no.tobkje.aagame.gameobjects.HalfSaw;
+import no.tobkje.aagame.gameobjects.baddies.Baddie;
+import no.tobkje.aagame.gameobjects.baddies.JumpDefeatable;
 
 public class ManCollisionListener implements CollisionListener {
 
@@ -14,14 +16,24 @@ public class ManCollisionListener implements CollisionListener {
 	}
 
 	@Override
-	public void onCollide(GameObject target) {
-		if (target instanceof Ground && !man.isDead()) {
-			man.land();
-			// Nudge back over ground
-			man.getPosition().y = (target.getPosition().y + target.getHeight() + 1);
-		} else if (target instanceof HalfSaw && !man.isDead()) {
-			man.die();
+	public void onCollide(GameObject target, int direction) {
+		if (man.isDead())
+			return;
+		if (target instanceof Ground) {
+			man.land(target);
+		} else if (target instanceof Baddie && !target.isDead()) {
+			if (target instanceof JumpDefeatable) {
+				System.out.println(direction);
+				boolean defeats = (direction < -40 && direction > -170);
+				if (defeats) {
+					((JumpDefeatable) target).defeat();
+					man.land(target);
+					man.jump();
+				} else
+					((Baddie) target).hurt(man);
+			} else {
+				((Baddie) target).hurt(man);
+			}
 		}
 	}
-
 }

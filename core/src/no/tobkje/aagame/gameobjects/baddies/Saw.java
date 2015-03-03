@@ -1,11 +1,12 @@
-package no.tobkje.aagame.gameobjects;
+package no.tobkje.aagame.gameobjects.baddies;
 
 import no.tobkje.aagame.assets.Assets;
+import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Saw extends AbstractGameObject {
+public class Saw extends AbstractBaddie {
 
 	public static final float WIDTH = 48, HEIGHT = 48;
 

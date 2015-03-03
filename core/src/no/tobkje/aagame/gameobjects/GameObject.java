@@ -154,4 +154,9 @@ public interface GameObject {
 	 * Destroy the object TODO: game-logic dependent stuff?
 	 */
 	public void destroy();
+	/**
+	 * Determine if the given object is dead
+	 * @return boolean indicating death
+	 */
+	public boolean isDead();
 }

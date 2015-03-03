@@ -1,0 +1,58 @@
+package no.tobkje.aagame.hud;
+
+import no.tobkje.aagame.assets.Assets;
+import no.tobkje.aagame.gameobjects.player.Jetpack;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+public class EnergyBar extends AbstractHudElement {
+	private Jetpack jetpack;
+	private static final float MAX_WIDTH = 120;
+
+	private float drawWidth;
+
+	public EnergyBar(float x, float y) {
+		super(x, y, MAX_WIDTH, 16);
+	}
+
+	@Override
+	public void draw(SpriteBatch batch) {
+		if (jetpack == null)
+			return;
+
+		TextureRegion tx;
+		if (jetpack.getEnergy() >= jetpack.getMaxEnergy() * 0.66f)
+			tx = Assets.hud_fuel_high;
+		else if (jetpack.getEnergy() >= jetpack.getMaxEnergy() * 0.33f)
+			tx = Assets.hud_fuel_medium;
+		else
+			tx = Assets.hud_fuel_low;
+		batch.draw(tx, getPosition().x, getPosition().y, drawWidth, getHeight());
+		batch.draw(Assets.hud_fuel_frame, getPosition().x, getPosition().y,
+				getWidth(), getHeight());
+		batch.draw(Assets.hud_fuel_frame_left_edge, getPosition().x - 8,
+				getPosition().y, 8, getHeight());
+		batch.draw(Assets.hud_fuel_frame_right_edge, getPosition().x
+				+ getWidth(), getPosition().y, 8, getHeight());
+		Assets.font16.draw(batch, "Fuel", getPosition().x, getPosition().y
+				+ getHeight() + Assets.font16.getCapHeight());
+	}
+
+	@Override
+	public void update(float delta) {
+		if (jetpack == null)
+			return;
+		float targetX = Math.max(jetpack.getEnergy() / jetpack.getMaxEnergy()
+				* getWidth(), 0);
+		drawWidth = (drawWidth * 8.5f + targetX * 1.5f) / 10;
+	}
+
+	public void bind(Jetpack jetpack) {
+		this.jetpack = jetpack;
+	}
+
+}
