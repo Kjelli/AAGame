@@ -50,7 +50,7 @@ public class Assets {
 			hud_fuel_frame, hud_fuel_frame_left_edge,
 			hud_fuel_frame_right_edge;
 
-	public static BitmapFont font16;
+	public static BitmapFont font16, font20;
 
 	public static void load() {
 
@@ -65,7 +65,7 @@ public class Assets {
 	}
 
 	private static void loadParticles() {
-		particleSmokeSheet = new Texture("smoke.png");
+		particleSmokeSheet = new Texture("smoke2.png");
 		smoke = loadAndFlip(particleSmokeSheet, 0, 0, 16, 16);
 	}
 
@@ -78,9 +78,15 @@ public class Assets {
 	private static void loadFont() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
 				Gdx.files.internal("visitor1.ttf"));
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 16;
-		font16 = generator.generateFont(parameter);
+
+		FreeTypeFontParameter size16 = new FreeTypeFontParameter();
+		size16.size = 16;
+		font16 = generator.generateFont(size16);
+
+		FreeTypeFontParameter size20 = new FreeTypeFontParameter();
+		size20.size = 20;
+		font20 = generator.generateFont(size20);
+
 		generator.dispose();
 	}
 
@@ -129,7 +135,7 @@ public class Assets {
 		baddie_blue_walk_animation = new Animation(0.15f, baddie_blue_walk);
 		baddie_blue_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
-		baddie_blue_dead = loadAndFlip(baddieSheet, 48, 0, 16, 15);
+		baddie_blue_dead = loadAndFlip(baddieSheet, 32, 0, 16, 15);
 
 		baddie_spike_walk = new TextureRegion[6];
 		for (int i = 0; i < 6; i++) {
@@ -147,7 +153,7 @@ public class Assets {
 		baddie_green_walk_animation = new Animation(0.15f, baddie_green_walk);
 		baddie_green_walk_animation.setPlayMode(Animation.PlayMode.LOOP);
 
-		baddie_green_dead = loadAndFlip(baddieSheet, 16, 60, 16, 15);
+		baddie_green_dead = loadAndFlip(baddieSheet, 32, 60, 16, 15);
 	}
 
 	private static void loadHud() {
@@ -191,5 +197,12 @@ public class Assets {
 
 		if (fuelSheet != null)
 			fuelSheet.dispose();
+
+		if (font16 != null)
+			font16.dispose();
+
+		if (font20 != null)
+			font20.dispose();
+
 	}
 }
