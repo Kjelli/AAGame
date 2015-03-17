@@ -56,6 +56,7 @@ public class PlayScreen extends AbstractGameScreen {
 		spawn(theMan);
 
 		((PlayHud) getHud()).energyBar.bind(theMan.getJetpack());
+		((PlayHud) getHud()).scoreValue.bind(theMan);
 
 		levelVelocity = LEVEL_VELOCITY_INITIAL;
 	}

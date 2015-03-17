@@ -1,6 +1,7 @@
 package no.tobkje.aagame.hud;
 
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
+import no.tobkje.aagame.gameobjects.GameObject;
 
 public abstract class AbstractHudElement extends AbstractGameObject implements
 		HudElement {
@@ -21,5 +22,11 @@ public abstract class AbstractHudElement extends AbstractGameObject implements
 	@Override
 	public void destroy() {
 		parentLayer.removeHudElement(this);
+	}
+
+	public void bind(GameObject object) {
+		System.err
+				.println("You must override bind to actually have any hudelement-specific behaviour");
+		return;
 	}
 }

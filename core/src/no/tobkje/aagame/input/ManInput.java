@@ -39,6 +39,10 @@ public class ManInput implements InputProcessor {
 			return true;
 		case Input.Keys.R:
 			theMan.getParentScreen().reset();
+			return true;
+		case Input.Keys.PLUS:
+			theMan.score(10);
+			return true;
 
 		}
 		return false;

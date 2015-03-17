@@ -47,9 +47,9 @@ public abstract class AbstractBackground implements Background {
 	}
 
 	@Override
-	public void reset() {
+	public void clear() {
 		for (Layer l : layers) {
-			l.reset();
+			l.clear();
 		}
 	}
 

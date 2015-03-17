@@ -29,6 +29,7 @@ public abstract class AbstractHudLayer implements HudLayer {
 	public void clear() {
 		for (HudElement element : elements) {
 			element.destroy();
+			System.out.println("Removed " + element.getClass().getName());
 		}
 		elements.clear();
 	}

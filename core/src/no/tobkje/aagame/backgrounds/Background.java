@@ -17,5 +17,5 @@ public interface Background{
 	
 	Color getColor();
 
-	void reset();
+	void clear();
 }

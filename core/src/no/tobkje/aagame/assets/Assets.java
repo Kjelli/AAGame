@@ -50,7 +50,7 @@ public class Assets {
 			hud_fuel_frame, hud_fuel_frame_left_edge,
 			hud_fuel_frame_right_edge;
 
-	public static BitmapFont font16, font20;
+	public static BitmapFont font16, font20, font30;
 
 	public static void load() {
 
@@ -86,6 +86,10 @@ public class Assets {
 		FreeTypeFontParameter size20 = new FreeTypeFontParameter();
 		size20.size = 20;
 		font20 = generator.generateFont(size20);
+		
+		FreeTypeFontParameter size30 = new FreeTypeFontParameter();
+		size30.size = 30;
+		font30 = generator.generateFont(size30);
 
 		generator.dispose();
 	}

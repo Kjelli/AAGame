@@ -7,6 +7,7 @@ import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.common.Gravity;
+import no.tobkje.aagame.hud.ScoreValue;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,6 +22,7 @@ public class Man extends AbstractGameObject {
 
 	private Jetpack jetpack;
 	private ManCollisionListener mcl;
+	private ScoreValue scoreValue;
 
 	public Man(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
@@ -146,6 +148,20 @@ public class Man extends AbstractGameObject {
 	public void onSpawn() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void bindScoreValue(ScoreValue scoreValue) {
+		this.scoreValue = scoreValue;
+	}
+
+	public void score(int i) {
+		if(scoreValue == null){
+			System.err.println("Score Value element not bound!");
+			return;
+		}
+		
+		scoreValue.add(i);
+		
 	}
 
 }

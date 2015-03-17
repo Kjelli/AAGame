@@ -187,8 +187,8 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	private void resetLogic() {
 		resetFlag = false;
-		background.reset();
-		hud.reset();
+		background.clear();
+		hud.clear();
 		objects.clear();
 		init();
 	}

@@ -46,7 +46,7 @@ public class Layer {
 		}
 	}
 
-	public void reset() {
+	public void clear() {
 		objects.clear();
 	}
 }

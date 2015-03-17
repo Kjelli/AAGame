@@ -27,6 +27,7 @@ public class ManCollisionListener implements CollisionListener {
 				if (defeats) {
 					((JumpDefeatable) target).defeat();
 					man.land(target);
+					man.score(1);
 					man.jump();
 				} else
 					((Baddie) target).hurt(man);
