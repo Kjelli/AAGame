@@ -23,9 +23,10 @@ public class ManCollisionListener implements CollisionListener {
 		} else if (target instanceof Baddie && !target.isDead()) {
 			if (target instanceof JumpDefeatable) {
 				System.out.println(direction);
-				boolean defeats = (direction < -40 && direction > -170);
+				boolean defeats = (direction < -40 && direction > -120);
 				if (defeats) {
 					((JumpDefeatable) target).defeat();
+					man.getJetpack().restoreEnergy(0.2f);
 					man.land(target);
 					man.score(1);
 					man.jump();

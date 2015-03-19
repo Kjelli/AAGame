@@ -86,9 +86,9 @@ public class Assets {
 		FreeTypeFontParameter size20 = new FreeTypeFontParameter();
 		size20.size = 20;
 		font20 = generator.generateFont(size20);
-		
+
 		FreeTypeFontParameter size30 = new FreeTypeFontParameter();
-		size30.size = 30;
+		size30.size = 40;
 		font30 = generator.generateFont(size30);
 
 		generator.dispose();
@@ -98,7 +98,7 @@ public class Assets {
 		tileSheet = new Texture("tiles_1.png");
 		ground = loadAndFlip(tileSheet, 0, 160, 80, 160);
 
-		spacesheet = new Texture("space-1.png");
+		spacesheet = new Texture("space-2.png");
 		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
 				spacesheet.getHeight());
 

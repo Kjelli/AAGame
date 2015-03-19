@@ -6,6 +6,7 @@ import no.tobkje.aagame.collisions.CollisionTest;
 import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.gameobjects.AbstractGameObject;
 import no.tobkje.aagame.gameobjects.GameObject;
+import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.hud.ScoreValue;
 import no.tobkje.aagame.screens.PlayScreen;
@@ -126,7 +127,9 @@ public class Man extends AbstractGameObject {
 	public void land(GameObject target) {
 		super.land(target);
 		jetpack.setThrusting(false);
-		jetpack.resetCooldown();
+		if (target instanceof Ground) {
+			jetpack.restoreEnergy(1.0f);
+		}
 	}
 
 	public void onClick() {
@@ -155,13 +158,13 @@ public class Man extends AbstractGameObject {
 	}
 
 	public void score(int i) {
-		if(scoreValue == null){
+		if (scoreValue == null) {
 			System.err.println("Score Value element not bound!");
 			return;
 		}
-		
+
 		scoreValue.add(i);
-		
+
 	}
 
 }

@@ -4,6 +4,7 @@ import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.GameScreen;
 import no.tobkje.aagame.tweens.GameObjectTweens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -164,11 +165,35 @@ public abstract class AbstractGameObject implements GameObject {
 		getParentScreen().despawn(this);
 	}
 
+	private static float LINE_LENGTH = 2;
+
 	@Override
 	public void drawDebug(ShapeRenderer sr) {
+		Color defaultColor = sr.getColor();
+
 		Rectangle r = hitbox.toRectangle();
 		sr.rect(r.x, r.y, origin.x, origin.y, r.width, r.height, 1.0f, 1.0f,
 				rotation);
+		
+		// Actual positions
+		sr.setColor(Color.BLUE);
+		sr.line(getPosition().x - LINE_LENGTH, getPosition().y - LINE_LENGTH,
+				getPosition().x + LINE_LENGTH, getPosition().y + LINE_LENGTH);
+		sr.line(getPosition().x - LINE_LENGTH, getPosition().y + LINE_LENGTH,
+				getPosition().x + LINE_LENGTH, getPosition().y - LINE_LENGTH);
+
+		// Positions relative to origin
+		sr.setColor(Color.YELLOW);
+		sr.line((getPosition().x + getOrigin().x) - LINE_LENGTH,
+				(getPosition().y + getOrigin().y) - LINE_LENGTH,
+				(getPosition().x + getOrigin().x) + LINE_LENGTH,
+				(getPosition().y + getOrigin().y) + LINE_LENGTH);
+		sr.line((getPosition().x + getOrigin().x) - LINE_LENGTH,
+				(getPosition().y + getOrigin().y) + LINE_LENGTH,
+				(getPosition().x + getOrigin().x) + LINE_LENGTH,
+				(getPosition().y + getOrigin().y) - LINE_LENGTH);
+		
+		sr.setColor(defaultColor);
 	}
 
 	@Override

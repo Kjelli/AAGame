@@ -6,14 +6,14 @@ import no.tobkje.aagame.gameobjects.player.Jetpack;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class EnergyBar extends AbstractHudElement {
+public class FuelBar extends AbstractHudElement {
 	private Jetpack jetpack;
 	private static final float MAX_WIDTH = 120;
 
 	private float drawWidth = MAX_WIDTH;
 
-	public EnergyBar(HudLayer hudLayer, float x, float y) {
-		super(hudLayer, x, y, MAX_WIDTH, 16);
+	public FuelBar(HudLayer hudLayer, float x, float y) {
+		super(hudLayer, x, y, MAX_WIDTH, 20);
 	}
 
 	@Override
@@ -35,8 +35,6 @@ public class EnergyBar extends AbstractHudElement {
 				getPosition().y, 8, getHeight());
 		batch.draw(Assets.hud_fuel_frame_right_edge, getPosition().x
 				+ getWidth(), getPosition().y, 8, getHeight());
-		Assets.font16.draw(batch, "Fuel", getPosition().x, getPosition().y
-				+ getHeight() + Assets.font16.getCapHeight());
 	}
 
 	@Override

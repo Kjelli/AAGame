@@ -18,6 +18,8 @@ public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan 
 		setScale((float) (Math.random() * 2f + 1));
 		setWidth((float) (WIDTH * getScale()));
 		setHeight((float) (HEIGHT * getScale()));
+		getOrigin().x = getWidth() / 2;
+		getOrigin().y = getHeight() / 4;
 		minimanlistener = new MiniManCollisionListener();
 		setHitbox(new Hitbox(x + getWidth() / 2, y + getHeight() / 4,
 				getWidth() / 2, getHeight() / 2, getWidth() / 4,
@@ -58,9 +60,9 @@ public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan 
 		}
 
 	}
-	
+
 	@Override
 	public void onSpawn() {
-		//TODO
+		// TODO
 	}
 }

@@ -4,9 +4,8 @@ import no.tobkje.aagame.gameobjects.particles.Smoke;
 
 public class Jetpack {
 	private static final float THRUST_INITIAL = 1000;
-	private static final float ENERGY_INITIAL = 100;
+	private static final float ENERGY_MAX = 100;
 
-	private boolean cooldown;
 	private boolean isThrusting;
 	private float energy;
 	private float thrust;
@@ -15,7 +14,7 @@ public class Jetpack {
 
 	public Jetpack(Man man) {
 		this.man = man;
-		energy = ENERGY_INITIAL;
+		energy = ENERGY_MAX;
 		thrust = THRUST_INITIAL;
 	}
 
@@ -24,17 +23,16 @@ public class Jetpack {
 	}
 
 	public void update(float delta) {
-		if (cooldown)
-			return;
 		if (energy <= 0) {
 			thrust = 0;
-			cooldown = true;
 		} else if (isThrusting) {
 			thrust = THRUST_INITIAL;
 			energy -= 40.0f * delta;
-			man.getParentScreen().spawn(
-					new Smoke((float)(man.getPosition().x + 2 + Math.random() * 8.0f), (float)(man
-							.getPosition().y + 4 + Math.random() * 8.0f), -thrust / 10.0f));
+			man.getParentScreen()
+					.spawn(new Smoke(
+							(float) (man.getPosition().x + 2 + Math.random() * 8.0f),
+							(float) (man.getPosition().y + 4 + Math.random() * 8.0f),
+							-thrust / 10.0f));
 		}
 	}
 
@@ -46,21 +44,20 @@ public class Jetpack {
 		return isThrusting;
 	}
 
-	public void resetCooldown() {
-		cooldown = false;
-		energy = ENERGY_INITIAL;
-	}
-
 	public float getEnergy() {
 		return energy;
 	}
 
 	public float getMaxEnergy() {
-		return ENERGY_INITIAL;
+		return ENERGY_MAX;
 	}
 
 	public float getEnergyPercentage() {
-		return energy / ENERGY_INITIAL;
+		return energy / ENERGY_MAX;
+	}
+
+	public void restoreEnergy(float f) {
+		energy = Math.min(energy + ENERGY_MAX * f, ENERGY_MAX);
 	}
 
 }
