@@ -19,7 +19,7 @@ public class AAGame extends Game {
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
 		GAME_HEIGHT = SCREEN_HEIGHT / (SCREEN_WIDTH / GAME_WIDTH);
-		Settings.put("debug", true);
+		Settings.put("debug", false);
 		setScreen(new SplashScreen(this));
 	}
 
