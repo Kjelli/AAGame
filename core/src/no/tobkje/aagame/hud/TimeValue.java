@@ -21,7 +21,6 @@ public class TimeValue extends AbstractHudElement {
 	@Override
 	public void draw(SpriteBatch batch) {
 		font.draw(batch, toString(), getPosition().x, getPosition().y);
-		System.out.println(toString());
 	}
 
 	@Override
@@ -37,7 +36,6 @@ public class TimeValue extends AbstractHudElement {
 
 	@Override
 	public String toString() {
-		System.out.println(runtime);
 		int millis = (int) (runtime * 100) % 100;
 		int seconds = (int) (runtime) % 60;
 		int minutes = (int) (runtime / 60) % 60;
