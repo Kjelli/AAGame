@@ -19,15 +19,21 @@ public class CollisionTest {
 			}
 		}
 	}
+
 	/**
 	 * Determine the angle between the objects relative from object <b>one</b>
-	 * @param one - the first object
-	 * @param other - the second object
+	 * 
+	 * @param one
+	 *            - the first object
+	 * @param other
+	 *            - the second object
 	 * @return the angle between the two objects.
 	 */
 	public static int determineDirection(GameObject one, GameObject other) {
-		double deltaX = one.getPosition().x - other.getPosition().x;
-		double deltaY = other.getPosition().y - one.getPosition().y;
+		double deltaX = (other.getPosition().x + other.getOrigin().x)
+				- (one.getPosition().x + one.getOrigin().x);
+		double deltaY = (other.getPosition().y + other.getOrigin().y)
+				- (one.getPosition().y + one.getOrigin().y);
 		double angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
 		return (int) angle;
 	}
