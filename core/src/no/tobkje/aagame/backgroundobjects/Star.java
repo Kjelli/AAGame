@@ -29,4 +29,10 @@ public class Star extends AbstractBackgroundObject {
 		if (getPosition().x + getWidth() < 0)
 			getPosition().x = AAGame.GAME_WIDTH + getWidth();
 	}
+
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+
+	}
 }

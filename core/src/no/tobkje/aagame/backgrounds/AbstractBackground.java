@@ -1,12 +1,18 @@
 package no.tobkje.aagame.backgrounds;
 
+import no.tobkje.aagame.screens.GameScreen;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractBackground implements Background {
 	private final Layer[] layers;
+	GameScreen parentScreen;
+	private Color color;
 
 	public AbstractBackground(int layers) {
 		this.layers = new Layer[layers];
+		color = new Color(0, 0, 0, 1f);
 	}
 
 	public Layer[] getLayers() {
@@ -21,9 +27,9 @@ public abstract class AbstractBackground implements Background {
 
 		layers[index] = layer;
 	}
-	
-	public void render(SpriteBatch batch){
-		for(Layer l : layers){
+
+	public void render(SpriteBatch batch) {
+		for (Layer l : layers) {
 			l.render(batch);
 		}
 	}
@@ -34,12 +40,26 @@ public abstract class AbstractBackground implements Background {
 			l.update(delta);
 		}
 	}
-	
+
 	@Override
-	public void reset() {
-		for(Layer l : layers){
-			l.reset();
+	public GameScreen getParentScreen() {
+		return parentScreen;
+	}
+
+	@Override
+	public void clear() {
+		for (Layer l : layers) {
+			l.clear();
 		}
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	@Override
+	public Color getColor() {
+		return color;
 	}
 
 }

@@ -3,9 +3,7 @@ package no.tobkje.aagame.gameobjects;
 import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.screens.PlayScreen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ground extends AbstractGameObject {
 	public static final float WIDTH = 64, HEIGHT = 128;
@@ -29,6 +27,11 @@ public class Ground extends AbstractGameObject {
 	public void draw(SpriteBatch batch) {
 		batch.draw(Assets.ground, Math.round(getPosition().x),
 				Math.round(getPosition().y), WIDTH, HEIGHT);
+	}
+	@Override
+	public void onSpawn() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

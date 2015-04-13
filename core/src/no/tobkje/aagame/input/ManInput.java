@@ -1,10 +1,8 @@
 package no.tobkje.aagame.input;
 
-import no.tobkje.aagame.gameobjects.Man;
-import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.settings.Settings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
@@ -19,13 +17,13 @@ public class ManInput implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
 		case Input.Keys.SPACE:
-			theMan.jump();
+			theMan.onClick();
 			return true;
 		case Input.Keys.D:
-			if (Settings.get("debug", false))
-				Settings.put("debug", false);
+			if (Settings.get("debug_draw", false))
+				Settings.put("debug_draw", false);
 			else
-				Settings.put("debug", true);
+				Settings.put("debug_draw", true);
 			return true;
 		case Input.Keys.S:
 			if (Settings.get("slow", false))
@@ -41,6 +39,10 @@ public class ManInput implements InputProcessor {
 			return true;
 		case Input.Keys.R:
 			theMan.getParentScreen().reset();
+			return true;
+		case Input.Keys.PLUS:
+			theMan.score(10);
+			return true;
 
 		}
 		return false;
@@ -48,7 +50,11 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+		switch (keycode) {
+		case Input.Keys.SPACE:
+			theMan.jumpRelease();
+			return true;
+		}
 		return false;
 	}
 
@@ -60,13 +66,13 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		theMan.jump();
+		theMan.onClick();
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		theMan.jumpRelease();
 		return false;
 	}
 
