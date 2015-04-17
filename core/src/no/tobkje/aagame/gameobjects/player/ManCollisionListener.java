@@ -16,14 +16,18 @@ public class ManCollisionListener implements CollisionListener {
 
 	@Override
 	public void onCollide(GameObject target, int direction) {
+		
 		if (man.isDead())
 			return;
+		
 		if (target instanceof Ground) {
+			
 			man.land(target);
 		} else if (target instanceof Baddie && !target.isDead()) {
 			if (target instanceof JumpDefeatable) {
-				System.out.println(direction);
-				boolean defeats = (direction < -40 && direction > -120);
+				
+				boolean defeats = (direction < -40 && direction > -140);
+				
 				if (defeats) {
 					((JumpDefeatable) target).defeat();
 					man.getJetpack().restoreEnergy(0.2f);
