@@ -5,6 +5,7 @@ import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class MiniManSpike extends AbstractMiniMan {
 	public MiniManSpike(float x, float y) {

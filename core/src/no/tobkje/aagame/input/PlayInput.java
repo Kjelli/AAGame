@@ -1,16 +1,20 @@
 package no.tobkje.aagame.input;
 
 import no.tobkje.aagame.gameobjects.player.Man;
+import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.screens.PlayScreen.State;
 import no.tobkje.aagame.settings.Settings;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-public class ManInput implements InputProcessor {
+public class PlayInput implements InputProcessor {
 	Man theMan;
+	PlayScreen screen;
 
-	public ManInput(Man theMan) {
+	public PlayInput(Man theMan, PlayScreen screen) {
 		this.theMan = theMan;
+		this.screen = screen;
 	}
 
 	@Override
@@ -67,37 +71,40 @@ public class ManInput implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if (PlayScreen.STATE == State.START) {
+			screen.play();
+			return true;
+		}
 		theMan.onClick();
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if (PlayScreen.STATE == State.START) {
+			return true;
+		}
 		theMan.jumpRelease();
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -12,6 +12,8 @@ public class PlayHud extends AbstractHudLayer {
 	public DistanceLabel distanceLabel;
 	public DistanceValue distanceValue;
 
+	public TapToBeginOverlay startOverlay;
+
 	@Override
 	public void init() {
 		fuelLabel = new FuelLabel(this, AAGame.GAME_WIDTH / 10,
@@ -28,11 +30,14 @@ public class PlayHud extends AbstractHudLayer {
 		distanceValue = new DistanceValue(this, AAGame.GAME_WIDTH * 20 / 20,
 				AAGame.GAME_HEIGHT - 75 + DistanceValue.HEIGHT);
 
+		startOverlay = new TapToBeginOverlay(this);
+
 		addHudElement(fuelLabel);
 		addHudElement(energyBar);
 		addHudElement(scoreLabel);
 		addHudElement(scoreValue);
 		addHudElement(distanceLabel);
 		addHudElement(distanceValue);
+		addHudElement(startOverlay);
 	}
 }

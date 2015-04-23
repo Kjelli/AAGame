@@ -15,6 +15,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class SplashScreen extends AbstractGameScreen {
 	public SplashElement splashT, splashK;
@@ -145,6 +147,12 @@ public class SplashScreen extends AbstractGameScreen {
 				return true;
 			}
 		});
+	}
+
+	@Override
+	protected void drawOnScreen(SpriteBatch batch) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

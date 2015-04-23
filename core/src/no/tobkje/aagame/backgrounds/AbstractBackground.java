@@ -4,6 +4,7 @@ import no.tobkje.aagame.screens.GameScreen;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractBackground implements Background {
 	private final Layer[] layers;

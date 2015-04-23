@@ -5,10 +5,11 @@ import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class DistanceValue extends AbstractHudElement {
 
-	public static final BitmapFont font = Assets.font30;
+	public static final BitmapFont font = Assets.font30b;
 	public static final float WIDTH = font.getBounds("0").width;
 	public static final float HEIGHT = font.getCapHeight();
 
@@ -55,5 +56,9 @@ public class DistanceValue extends AbstractHudElement {
 			return "0" + (int) distance + "m";
 		else
 			return (int) distance + "m";
+	}
+
+	public long getValue() {
+		return (long) distance;
 	}
 }

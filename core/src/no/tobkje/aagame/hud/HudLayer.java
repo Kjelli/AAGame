@@ -1,6 +1,7 @@
 package no.tobkje.aagame.hud;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public interface HudLayer {
 	void init();

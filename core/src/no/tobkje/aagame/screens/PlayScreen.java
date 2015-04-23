@@ -4,24 +4,30 @@ import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.player.Man;
-import no.tobkje.aagame.hud.HudLayer;
 import no.tobkje.aagame.hud.PlayHud;
-import no.tobkje.aagame.input.ManInput;
+import no.tobkje.aagame.input.PlayInput;
+import no.tobkje.aagame.settings.AAPrefs;
 import no.tobkje.aagame.spawners.SimpleSpawner;
 import no.tobkje.aagame.spawners.Spawner;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class PlayScreen extends AbstractGameScreen {
-
 	public static final float LEVEL_VELOCITY_INITIAL = 65.0f;
+
+	public enum State {
+		START, PLAYING, DEAD
+	}
+
 	private static float levelVelocity;
+	public static State STATE;
+	private Spawner spawner;
 
-	Spawner spawner;
+	private float runningdistance;
 
-	Man theMan;
-	OrthographicCamera camera;
+	private Man theMan;
 
 	public PlayScreen() {
 		super();
@@ -29,6 +35,7 @@ public class PlayScreen extends AbstractGameScreen {
 		Background background = new PlayBackground();
 		setBackground(background);
 		setHud(new PlayHud());
+
 	}
 
 	@Override
@@ -45,7 +52,7 @@ public class PlayScreen extends AbstractGameScreen {
 	}
 
 	private void initGame() {
-		theMan = new Man(140, 240);
+		theMan = new Man(140, 60);
 		spawner = new SimpleSpawner(this, 550, 60);
 
 		for (int i = 0; i <= 11; i++) {
@@ -57,15 +64,23 @@ public class PlayScreen extends AbstractGameScreen {
 		((PlayHud) getHud()).energyBar.bind(theMan.getJetpack());
 		((PlayHud) getHud()).scoreValue.bind(theMan);
 
-		levelVelocity = LEVEL_VELOCITY_INITIAL;
+		STATE = State.START;
+		levelVelocity = 0;
+		runningdistance = 0;
 	}
 
 	private void initInput() {
-		Gdx.input.setInputProcessor(new ManInput(theMan));
+		Gdx.input.setInputProcessor(new PlayInput(theMan, this));
 	}
 
-	public void draw(float delta) {
-		super.render(delta);
+	public void drawOnScreen(SpriteBatch batch) {
+		switch (STATE) {
+		case START:
+			// TODO draw stuff
+		default:
+			break;
+
+		}
 	}
 
 	public static float getLevelVelocity() {
@@ -80,7 +95,43 @@ public class PlayScreen extends AbstractGameScreen {
 
 	@Override
 	protected void updateScreen(float delta) {
-		spawner.update(getLevelVelocity() * delta);
-		levelVelocity += 0.01f;
+		switch (STATE) {
+		case START:
+			break;
+		case PLAYING:
+			spawner.update(getLevelVelocity() * delta);
+			levelVelocity += 0.01f;
+
+			runningdistance += getLevelVelocity() * delta * 0.10f;
+			break;
+		case DEAD:
+			break;
+		default:
+			break;
+
+		}
+	}
+
+	public void play() {
+		STATE = State.PLAYING;
+		levelVelocity = LEVEL_VELOCITY_INITIAL;
+	}
+
+	public void stop() {
+		PlayScreen.setLevelVelocity(0);
+		postHighscore(theMan.getScoreValue().getValue(), getRunningDistance());
+	}
+
+	private void postHighscore(long hs, long hm) {
+		System.out.println(AAPrefs.get() == null);
+		if (AAPrefs.get().getLong("hs") < hs) {
+			AAPrefs.get().putLong("hs", hs);
+			AAPrefs.get().putLong("hm", hm);
+			AAPrefs.get().flush();
+		}
+	}
+
+	private long getRunningDistance() {
+		return (long) runningdistance;
 	}
 }

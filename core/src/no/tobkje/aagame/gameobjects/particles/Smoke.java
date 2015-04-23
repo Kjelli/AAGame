@@ -4,6 +4,7 @@ import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Smoke extends AbstractParticle {
 	public static final float WIDTH = 4, HEIGHT = 4;

@@ -6,9 +6,10 @@ import no.tobkje.aagame.gameobjects.player.Man;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class ScoreValue extends AbstractHudElement {
-	public static final BitmapFont font = Assets.font30;
+	public static final BitmapFont font = Assets.font30b;
 	public static final float WIDTH = font.getBounds("0").width;
 	public static final float HEIGHT = font.getCapHeight();
 
@@ -22,7 +23,8 @@ public class ScoreValue extends AbstractHudElement {
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		font.draw(batch, score + "", getPosition().x - getWidth()/2, getPosition().y);
+		font.draw(batch, score + "", getPosition().x - getWidth() / 2,
+				getPosition().y);
 	}
 
 	@Override
@@ -51,6 +53,10 @@ public class ScoreValue extends AbstractHudElement {
 	public void add(int i) {
 		score += i;
 		setWidth(font.getBounds(score + "").width);
+	}
+
+	public int getValue() {
+		return score;
 	}
 
 }

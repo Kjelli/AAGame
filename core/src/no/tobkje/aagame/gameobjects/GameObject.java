@@ -137,6 +137,7 @@ public interface GameObject {
 	 * 
 	 * @param batch
 	 *            - The SpriteBatch responsible for drawing the GameObject
+	 * @param sr 
 	 */
 	public void draw(SpriteBatch batch);
 

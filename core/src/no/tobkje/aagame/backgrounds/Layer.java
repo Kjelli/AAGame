@@ -3,6 +3,7 @@ package no.tobkje.aagame.backgrounds;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import no.tobkje.aagame.backgroundobjects.BackgroundObject;
 

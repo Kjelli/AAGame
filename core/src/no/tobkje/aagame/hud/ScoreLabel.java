@@ -4,6 +4,7 @@ import no.tobkje.aagame.assets.Assets;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class ScoreLabel extends AbstractHudElement {
 	public static String DRAW_STRING = "SCORE";

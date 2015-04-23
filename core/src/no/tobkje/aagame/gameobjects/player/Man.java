@@ -10,10 +10,12 @@ import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.hud.ScoreValue;
 import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.screens.PlayScreen.State;
 import no.tobkje.aagame.settings.Settings;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Man extends AbstractGameObject {
 
@@ -39,6 +41,9 @@ public class Man extends AbstractGameObject {
 
 	@Override
 	public void update(float delta) {
+		if (PlayScreen.STATE == State.START) {
+			return;
+		}
 		runTime += delta;
 
 		movementLogic(delta);
@@ -95,7 +100,10 @@ public class Man extends AbstractGameObject {
 	@Override
 	public void draw(SpriteBatch batch) {
 		TextureRegion region;
-		if (isOnGround()) {
+
+		if (PlayScreen.STATE == State.START) {
+			region = Assets.man_walk[6];
+		} else if (isOnGround()) {
 			region = Assets.mAnimation.getKeyFrame(runTime);
 		} else {
 			// When jumping it displays one frame.
@@ -121,7 +129,8 @@ public class Man extends AbstractGameObject {
 		if (!isOnGround())
 			jumpRelease();
 		getVelocity().x = PlayScreen.getLevelVelocity();
-		PlayScreen.setLevelVelocity(0);
+
+		((PlayScreen) getParentScreen()).stop();
 	}
 
 	@Override
@@ -166,6 +175,10 @@ public class Man extends AbstractGameObject {
 
 		scoreValue.add(i);
 
+	}
+
+	public ScoreValue getScoreValue() {
+		return scoreValue;
 	}
 
 }

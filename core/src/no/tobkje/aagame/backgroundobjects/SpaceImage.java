@@ -5,6 +5,7 @@ import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class SpaceImage extends AbstractBackgroundObject {
 	public static final float WIDTH = AAGame.GAME_WIDTH * 2,

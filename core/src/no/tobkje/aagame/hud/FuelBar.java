@@ -5,6 +5,7 @@ import no.tobkje.aagame.gameobjects.player.Jetpack;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class FuelBar extends AbstractHudElement {
 	private Jetpack jetpack;
@@ -49,11 +50,11 @@ public class FuelBar extends AbstractHudElement {
 	public void bind(Jetpack jetpack) {
 		this.jetpack = jetpack;
 	}
-	
+
 	@Override
 	public void onSpawn() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

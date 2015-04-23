@@ -5,6 +5,7 @@ import no.tobkje.aagame.collisions.Hitbox;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Spike extends AbstractBaddie {
 

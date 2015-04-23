@@ -4,6 +4,7 @@ import no.tobkje.aagame.assets.Assets;
 import no.tobkje.aagame.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Ground extends AbstractGameObject {
 	public static final float WIDTH = 64, HEIGHT = 120;

@@ -22,6 +22,9 @@ public class Assets {
 	public static Texture fuelSheet;
 	public static Texture particleSmokeSheet;
 
+	private static Texture whiteSheet;
+	public static TextureRegion white;
+
 	public static Texture splashSheet_t, splashSheet_k, splashSheet_logo;
 	public static TextureRegion splash_t, splash_k, splash_logo;
 
@@ -50,7 +53,7 @@ public class Assets {
 			hud_fuel_frame, hud_fuel_frame_left_edge,
 			hud_fuel_frame_right_edge;
 
-	public static BitmapFont font16, font20, font30;
+	public static BitmapFont font16, font20, font30b, font30a;
 
 	public static void load() {
 
@@ -93,9 +96,13 @@ public class Assets {
 		size20.size = 20;
 		font20 = generator.generateFont(size20);
 
-		FreeTypeFontParameter size30 = new FreeTypeFontParameter();
-		size30.size = 30;
-		font30 = generator2.generateFont(size30);
+		FreeTypeFontParameter size30a = new FreeTypeFontParameter();
+		size30a.size = 30;
+		font30a = generator.generateFont(size30a);
+
+		FreeTypeFontParameter size30b = new FreeTypeFontParameter();
+		size30b.size = 30;
+		font30b = generator2.generateFont(size30b);
 
 		generator.dispose();
 		generator2.dispose();
@@ -176,6 +183,9 @@ public class Assets {
 		hud_fuel_frame = loadAndFlip(fuelSheet, 24, 0, 8, 8);
 		hud_fuel_frame_right_edge = loadAndFlip(fuelSheet, 32, 0, 4, 8);
 		hud_fuel_frame_left_edge = loadAndFlip(fuelSheet, 36, 0, 4, 8);
+
+		whiteSheet = new Texture("white.png");
+		white = loadAndFlip(whiteSheet, 0, 0, 2, 2);
 	}
 
 	private static TextureRegion loadAndFlip(Texture spritesheet, int x, int y,
@@ -218,8 +228,18 @@ public class Assets {
 		if (font16 != null)
 			font16.dispose();
 
-		if (font20 != null)
+		if (font20 != null) {
 			font20.dispose();
+		}
+		if (font30a != null) {
+			font30a.dispose();
+		}
+		if (font30b != null) {
+			font30b.dispose();
+		}
 
+		if (whiteSheet != null) {
+			whiteSheet.dispose();
+		}
 	}
 }

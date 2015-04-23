@@ -3,6 +3,7 @@ package no.tobkje.aagame.gameobjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class SplashElement extends AbstractGameObject {
 	private Color color;

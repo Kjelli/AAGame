@@ -27,7 +27,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 	private final ArrayList<GameObject> addQueue;
 	private final ArrayList<GameObject> removeQueue;
 	private final OrthographicCamera camera;
-	private final SpriteBatch batch;
+	protected final SpriteBatch batch;
 	ShapeRenderer sr;
 	private final TweenManager manager;
 
@@ -75,7 +75,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 		updateObjects(delta);
 		if (hud != null)
 			hud.update(delta);
-		draw(batch);
+		draw(batch, sr);
 
 		runtime += delta;
 
@@ -92,7 +92,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 		sr.end();
 	}
 
-	private void draw(SpriteBatch batch) {
+	private void draw(SpriteBatch batch, ShapeRenderer sr) {
 		if (background != null) {
 			Color c = background.getColor();
 			Gdx.gl.glClearColor(c.r, c.g, c.b, c.a);
@@ -101,10 +101,12 @@ public abstract class AbstractGameScreen implements GameScreen {
 		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		sr.begin();
 		batch.begin();
 		{
 			camera.update();
 			batch.setProjectionMatrix(camera.combined);
+			sr.setProjectionMatrix(camera.combined);
 			if (background != null)
 				background.render(batch);
 
@@ -113,9 +115,13 @@ public abstract class AbstractGameScreen implements GameScreen {
 			}
 			if (hud != null)
 				hud.render(batch);
+			drawOnScreen(batch);
 		}
+		sr.end();
 		batch.end();
 	}
+
+	protected abstract void drawOnScreen(SpriteBatch batch);
 
 	protected abstract void updateScreen(float delta);
 
