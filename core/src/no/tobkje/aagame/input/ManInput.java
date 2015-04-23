@@ -40,6 +40,13 @@ public class ManInput implements InputProcessor {
 		case Input.Keys.R:
 			theMan.getParentScreen().reset();
 			return true;
+
+		case Input.Keys.G:
+			if (Settings.get("debug_nogravity", false))
+				Settings.put("debug_nogravity", false);
+			else
+				Settings.put("debug_nogravity", true);
+			return true;
 		case Input.Keys.PLUS:
 			theMan.score(10);
 			return true;

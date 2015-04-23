@@ -71,17 +71,19 @@ public class Assets {
 
 	public static void loadSplash() {
 		splashSheet_t = new Texture("splash_t.png");
-		splash_t = new TextureRegion(splashSheet_t, 0, 0, splashSheet_t.getWidth(),
-				splashSheet_t.getHeight());
-		
+		splash_t = new TextureRegion(splashSheet_t, 0, 0,
+				splashSheet_t.getWidth(), splashSheet_t.getHeight());
+
 		splashSheet_k = new Texture("splash_k.png");
-		splash_k = new TextureRegion(splashSheet_k, 0, 0, splashSheet_k.getWidth(),
-				splashSheet_k.getHeight());
+		splash_k = new TextureRegion(splashSheet_k, 0, 0,
+				splashSheet_k.getWidth(), splashSheet_k.getHeight());
 	}
 
 	private static void loadFont() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(
 				Gdx.files.internal("visitor1.ttf"));
+		FreeTypeFontGenerator generator2 = new FreeTypeFontGenerator(
+				Gdx.files.internal("testfont3.ttf"));
 
 		FreeTypeFontParameter size16 = new FreeTypeFontParameter();
 		size16.size = 16;
@@ -92,15 +94,17 @@ public class Assets {
 		font20 = generator.generateFont(size20);
 
 		FreeTypeFontParameter size30 = new FreeTypeFontParameter();
-		size30.size = 40;
-		font30 = generator.generateFont(size30);
+		size30.size = 30;
+		font30 = generator2.generateFont(size30);
 
 		generator.dispose();
+		generator2.dispose();
+
 	}
 
 	private static void loadBackground() {
 		tileSheet = new Texture("tiles_1.png");
-		ground = loadAndFlip(tileSheet, 0, 160, 80, 160);
+		ground = loadAndFlip(tileSheet, 0, 80, 80, 160);
 
 		spacesheet = new Texture("space-1.png");
 		space_bg = loadAndFlip(spacesheet, 0, 0, spacesheet.getWidth(),
@@ -182,14 +186,14 @@ public class Assets {
 	}
 
 	public static void dispose() {
-		if (splashSheet_t != null) 
+		if (splashSheet_t != null)
 			splashSheet_t.dispose();
-		if (splashSheet_k != null) 
+		if (splashSheet_k != null)
 			splashSheet_k.dispose();
-		if(splashSheet_logo != null){
+		if (splashSheet_logo != null) {
 			splashSheet_logo.dispose();
 		}
-		
+
 		if (tileSheet != null)
 			tileSheet.dispose();
 

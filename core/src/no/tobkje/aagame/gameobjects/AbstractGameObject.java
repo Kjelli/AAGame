@@ -42,6 +42,16 @@ public abstract class AbstractGameObject implements GameObject {
 		return position;
 	}
 
+	public final void setX(float x) {
+		position.x = x;
+		hitbox.update(position);
+	}
+
+	public final void setY(float y) {
+		position.y = y;
+		hitbox.update(position);
+	}
+
 	@Override
 	public final Vector2 getVelocity() {
 		return velocity;
@@ -148,7 +158,7 @@ public abstract class AbstractGameObject implements GameObject {
 		getVelocity().y = 0;
 		getAcceleration().y = 0;
 		// Nudge back over ground
-		getPosition().y = (target.getHitbox().getY()
+		setY(target.getHitbox().getY()
 				+ target.getHitbox().getHeight() + 1);
 	}
 
@@ -174,7 +184,7 @@ public abstract class AbstractGameObject implements GameObject {
 		Rectangle r = hitbox.toRectangle();
 		sr.rect(r.x, r.y, origin.x, origin.y, r.width, r.height, 1.0f, 1.0f,
 				rotation);
-		
+
 		// Actual positions
 		sr.setColor(Color.BLUE);
 		sr.line(getPosition().x - LINE_LENGTH, getPosition().y - LINE_LENGTH,
@@ -192,7 +202,7 @@ public abstract class AbstractGameObject implements GameObject {
 				(getPosition().y + getOrigin().y) + LINE_LENGTH,
 				(getPosition().x + getOrigin().x) + LINE_LENGTH,
 				(getPosition().y + getOrigin().y) - LINE_LENGTH);
-		
+
 		sr.setColor(defaultColor);
 	}
 

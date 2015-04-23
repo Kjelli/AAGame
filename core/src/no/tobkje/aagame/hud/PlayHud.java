@@ -9,8 +9,8 @@ public class PlayHud extends AbstractHudLayer {
 	public ScoreLabel scoreLabel;
 	public ScoreValue scoreValue;
 
-	public TimeLabel timeLabel;
-	public TimeValue timeValue;
+	public DistanceLabel distanceLabel;
+	public DistanceValue distanceValue;
 
 	@Override
 	public void init() {
@@ -22,17 +22,17 @@ public class PlayHud extends AbstractHudLayer {
 				- ScoreLabel.WIDTH / 2, AAGame.GAME_HEIGHT - 20
 				+ ScoreLabel.HEIGHT);
 		scoreValue = new ScoreValue(this, AAGame.GAME_WIDTH / 2,
-				AAGame.GAME_HEIGHT - 50 + ScoreValue.HEIGHT);
-		timeLabel = new TimeLabel(this, AAGame.GAME_WIDTH * 8 / 10,
-				AAGame.GAME_HEIGHT - 20 + TimeLabel.HEIGHT);
-		timeValue = new TimeValue(this, AAGame.GAME_WIDTH * 13 / 20,
-				AAGame.GAME_HEIGHT - 50 + TimeValue.HEIGHT);
+				AAGame.GAME_HEIGHT - 75 + ScoreValue.HEIGHT);
+		distanceLabel = new DistanceLabel(this, AAGame.GAME_WIDTH * 15 / 20,
+				AAGame.GAME_HEIGHT - 20 + DistanceLabel.HEIGHT);
+		distanceValue = new DistanceValue(this, AAGame.GAME_WIDTH * 20 / 20,
+				AAGame.GAME_HEIGHT - 75 + DistanceValue.HEIGHT);
 
 		addHudElement(fuelLabel);
 		addHudElement(energyBar);
 		addHudElement(scoreLabel);
 		addHudElement(scoreValue);
-		addHudElement(timeLabel);
-		addHudElement(timeValue);
+		addHudElement(distanceLabel);
+		addHudElement(distanceValue);
 	}
 }

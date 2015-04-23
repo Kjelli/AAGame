@@ -6,7 +6,7 @@ import no.tobkje.aagame.screens.PlayScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Ground extends AbstractGameObject {
-	public static final float WIDTH = 64, HEIGHT = 128;
+	public static final float WIDTH = 64, HEIGHT = 120;
 
 	public Ground(float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
@@ -15,7 +15,7 @@ public class Ground extends AbstractGameObject {
 	public void update(float delta) {
 
 		if (getPosition().x + getWidth() < 0) {
-			getPosition().x += getParentScreen().getCamera().viewportWidth + getWidth();
+			setX(getPosition().x += getParentScreen().getCamera().viewportWidth + 2*getWidth());
 		}
 
 		getVelocity().x = -PlayScreen.getLevelVelocity();

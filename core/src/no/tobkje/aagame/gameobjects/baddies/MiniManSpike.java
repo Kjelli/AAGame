@@ -11,6 +11,10 @@ public class MiniManSpike extends AbstractMiniMan {
 		super(x, y);
 	}
 
+	public MiniManSpike(float x, float y, float scale) {
+		super(x, y, scale);
+	}
+
 	@Override
 	public void draw(SpriteBatch batch) {
 		TextureRegion tx;

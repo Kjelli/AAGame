@@ -10,6 +10,7 @@ import no.tobkje.aagame.gameobjects.Ground;
 import no.tobkje.aagame.gameobjects.common.Gravity;
 import no.tobkje.aagame.hud.ScoreValue;
 import no.tobkje.aagame.screens.PlayScreen;
+import no.tobkje.aagame.settings.Settings;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -52,13 +53,13 @@ public class Man extends AbstractGameObject {
 		}
 
 		move(delta);
-		if (!isOnGround()) {
+		if (!isOnGround() && !Settings.get("debug_nogravity", false)) {
 			Gravity.fall(this, delta);
 		}
 		CollisionTest.simple(this, mcl);
 
 		if (getPosition().y + getHeight() >= AAGame.GAME_HEIGHT) {
-			getPosition().y = AAGame.GAME_HEIGHT - getHeight();
+			setY(AAGame.GAME_HEIGHT - getHeight());
 			getVelocity().y = -1;
 
 		}

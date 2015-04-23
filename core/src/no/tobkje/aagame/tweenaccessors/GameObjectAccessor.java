@@ -34,14 +34,14 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 	public void setValues(GameObject target, int type, float[] newVal) {
 		switch (type) {
 		case POSITION_X:
-			target.getPosition().x = newVal[0];
+			target.setX(newVal[0]);
 			break;
 		case POSITION_Y:
-			target.getPosition().y = newVal[0];
+			target.setY(newVal[0]);
 			break;
 		case POSITION_XY:
-			target.getPosition().x = newVal[0];
-			target.getPosition().y = newVal[1];
+			target.setX(newVal[0]);
+			target.setY(newVal[0]);
 			break;
 		case ROTATION:
 			target.setRotation(newVal[0]);

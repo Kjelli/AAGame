@@ -10,12 +10,17 @@ import no.tobkje.aagame.screens.PlayScreen;
 
 public abstract class AbstractMiniMan extends AbstractBaddie implements MiniMan {
 	public static final float WIDTH = 32, HEIGHT = 32;
+	public static final float MINIMUM_SCALE = 2.0f, MAXIMUM_SCALE = 4.0f;
 	private CollisionListener minimanlistener;
 	private float scale;
 
 	public AbstractMiniMan(float x, float y) {
+		this(x, y, 0.0f);
+	}
+
+	public AbstractMiniMan(float x, float y, float scale) {
 		super(x, y, WIDTH, HEIGHT);
-		setScale((float) (Math.random() * 2f + 1));
+		setScale((float) (scale * (MAXIMUM_SCALE - MINIMUM_SCALE) + MINIMUM_SCALE));
 		setWidth((float) (WIDTH * getScale()));
 		setHeight((float) (HEIGHT * getScale()));
 		getOrigin().x = getWidth() / 2;

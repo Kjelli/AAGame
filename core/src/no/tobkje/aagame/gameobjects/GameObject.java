@@ -14,7 +14,21 @@ public interface GameObject {
 	 * 
 	 * @return 2-dimensional vector (x position, y position)
 	 */
-	public Vector2 getPosition();
+	Vector2 getPosition();
+
+	/**
+	 * Modify the x position of the gameobject's 2-dimensional position vector
+	 * 
+	 * @param x
+	 */
+	void setX(float x);
+
+	/**
+	 * Modify the y position of the gameobject's 2-dimensional position vector
+	 * 
+	 * @param y
+	 */
+	void setY(float y);
 
 	/**
 	 * Retrieve the GameObject's velocity as a 2-dimensional vector
@@ -154,14 +168,17 @@ public interface GameObject {
 	 * Destroy the object TODO: game-logic dependent stuff?
 	 */
 	public void destroy();
+
 	/**
 	 * Determine if the given object is dead
+	 * 
 	 * @return boolean indicating death
 	 */
 	public boolean isDead();
-	
+
 	/**
-	 * Method run when object is added to the gameworld. Somewhat like a constructor.
+	 * Method run when object is added to the gameworld. Somewhat like a
+	 * constructor.
 	 */
 	public void onSpawn();
 }

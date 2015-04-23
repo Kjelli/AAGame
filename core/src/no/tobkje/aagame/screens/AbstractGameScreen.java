@@ -166,6 +166,14 @@ public abstract class AbstractGameScreen implements GameScreen {
 		go.onSpawn();
 	}
 
+	public void spawn(GameObject go, float x, float y) {
+		go.setX(x);
+		go.setY(y);
+		addQueue.add(go);
+		go.setParentScreen(this);
+		go.onSpawn();
+	}
+
 	public void despawn(GameObject go) {
 		removeQueue.add(go);
 	}

@@ -27,7 +27,7 @@ public class Star extends AbstractBackgroundObject {
 		getVelocity().x = -PlayScreen.getLevelVelocity();
 		move(delta);
 		if (getPosition().x + getWidth() < 0)
-			getPosition().x = AAGame.GAME_WIDTH + getWidth();
+			setX(AAGame.GAME_WIDTH + getWidth());
 	}
 
 	@Override

@@ -12,6 +12,10 @@ public class MiniManBlue extends AbstractMiniMan implements JumpDefeatable {
 		super(x, y);
 	}
 
+	public MiniManBlue(float x, float y, float scale) {
+		super(x, y, scale);
+	}
+
 	@Override
 	public void draw(SpriteBatch batch) {
 		TextureRegion tx;
