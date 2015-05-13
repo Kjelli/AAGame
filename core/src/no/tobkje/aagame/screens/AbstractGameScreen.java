@@ -28,7 +28,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 	private final ArrayList<GameObject> removeQueue;
 	private final OrthographicCamera camera;
 	protected final SpriteBatch batch;
-	ShapeRenderer sr;
+	protected final ShapeRenderer sr;
 	private final TweenManager manager;
 
 	private static float runtime = 0;
@@ -75,7 +75,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 		updateObjects(delta);
 		if (hud != null)
 			hud.update(delta);
-		draw(batch, sr);
+		draw();
 
 		runtime += delta;
 
@@ -92,7 +92,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 		sr.end();
 	}
 
-	private void draw(SpriteBatch batch, ShapeRenderer sr) {
+	private void draw() {
 		if (background != null) {
 			Color c = background.getColor();
 			Gdx.gl.glClearColor(c.r, c.g, c.b, c.a);
@@ -101,12 +101,10 @@ public abstract class AbstractGameScreen implements GameScreen {
 		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		sr.begin();
 		batch.begin();
 		{
 			camera.update();
 			batch.setProjectionMatrix(camera.combined);
-			sr.setProjectionMatrix(camera.combined);
 			if (background != null)
 				background.render(batch);
 
@@ -115,13 +113,9 @@ public abstract class AbstractGameScreen implements GameScreen {
 			}
 			if (hud != null)
 				hud.render(batch);
-			drawOnScreen(batch);
 		}
-		sr.end();
 		batch.end();
 	}
-
-	protected abstract void drawOnScreen(SpriteBatch batch);
 
 	protected abstract void updateScreen(float delta);
 
@@ -190,19 +184,16 @@ public abstract class AbstractGameScreen implements GameScreen {
 	}
 
 	@Override
-	public OrthographicCamera getCamera() {
-		return camera;
-	}
-
-	@Override
 	public void reset() {
 		resetFlag = true;
 	}
 
 	private void resetLogic() {
 		resetFlag = false;
-		background.clear();
-		hud.clear();
+		if (background != null)
+			background.clear();
+		if (hud != null)
+			hud.clear();
 		objects.clear();
 		init();
 	}
@@ -239,7 +230,7 @@ public abstract class AbstractGameScreen implements GameScreen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		System.out.println("SHOULD DISPOSE");
 	}
 
 }

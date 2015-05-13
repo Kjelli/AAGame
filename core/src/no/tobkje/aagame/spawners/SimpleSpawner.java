@@ -8,8 +8,9 @@ import no.tobkje.aagame.spawners.spawngroups.SpikeGroup;
 
 public class SimpleSpawner implements Spawner {
 	private float x, y;
-	private float spawnIntervalDistance = 200.0f;
-	private float countdown = spawnIntervalDistance;
+	private float spawnIntervalDistanceMin = 200.0f;
+	private float spawnIntervalDistanceMax = 1000f;
+	private float countdown = spawnIntervalDistanceMin;
 
 	private PlayScreen parent;
 
@@ -44,21 +45,22 @@ public class SimpleSpawner implements Spawner {
 		}
 
 		if (spawnIndex < group.getSize() - 1) {
-			spawn();
+			spawn(countdown);
 			countdown += group.getSpawnOffset(spawnIndex);
 		} else {
-			spawn();
+			spawn(countdown);
 			group = newGroup();
 			spawnIndex = 0;
-			countdown += spawnIntervalDistance;
+			countdown += Math.random()
+					* (spawnIntervalDistanceMax - spawnIntervalDistanceMin)
+					+ spawnIntervalDistanceMin;
 		}
 
 	}
 
-	@Override
-	public void spawn() {
+	private void spawn(float xOffset) {
 		if (group.get(spawnIndex) != null) {
-			parent.spawn(group.get(spawnIndex), x, y);
+			parent.spawn(group.get(spawnIndex), x + xOffset, y);
 		}
 		spawnIndex++;
 	}
@@ -70,7 +72,7 @@ public class SimpleSpawner implements Spawner {
 		} else if (determinant < 0.66) {
 			return new MiniManRandomGroup(5);
 		} else {
-			return new SpikeGroup(5);
+			return new SpikeGroup(8);
 		}
 	}
 }

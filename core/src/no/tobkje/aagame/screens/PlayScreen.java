@@ -1,5 +1,6 @@
 package no.tobkje.aagame.screens;
 
+import no.tobkje.aagame.AAGame;
 import no.tobkje.aagame.backgrounds.Background;
 import no.tobkje.aagame.backgrounds.PlayBackground;
 import no.tobkje.aagame.gameobjects.Ground;
@@ -7,6 +8,7 @@ import no.tobkje.aagame.gameobjects.player.Man;
 import no.tobkje.aagame.hud.PlayHud;
 import no.tobkje.aagame.input.PlayInput;
 import no.tobkje.aagame.settings.AAPrefs;
+import no.tobkje.aagame.settings.Settings;
 import no.tobkje.aagame.spawners.SimpleSpawner;
 import no.tobkje.aagame.spawners.Spawner;
 
@@ -15,7 +17,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class PlayScreen extends AbstractGameScreen {
-	public static final float LEVEL_VELOCITY_INITIAL = 65.0f;
+	public static final float LEVEL_VELOCITY_INITIAL = 95.0f;
 
 	public enum State {
 		START, PLAYING, DEAD
@@ -53,10 +55,10 @@ public class PlayScreen extends AbstractGameScreen {
 
 	private void initGame() {
 		theMan = new Man(140, 60);
-		spawner = new SimpleSpawner(this, 550, 60);
+		spawner = new SimpleSpawner(this, AAGame.GAME_WIDTH + 30, 60);
 
-		for (int i = 0; i <= 11; i++) {
-			spawn(new Ground(Ground.WIDTH * i, -60));
+		for (int i = 0; i <= AAGame.GAME_WIDTH + 2*Ground.WIDTH; i += Ground.WIDTH) {
+			spawn(new Ground(i, -60));
 		}
 
 		spawn(theMan);
@@ -100,8 +102,7 @@ public class PlayScreen extends AbstractGameScreen {
 			break;
 		case PLAYING:
 			spawner.update(getLevelVelocity() * delta);
-			levelVelocity += 0.01f;
-
+			levelVelocity += 0.03f;
 			runningdistance += getLevelVelocity() * delta * 0.10f;
 			break;
 		case DEAD:

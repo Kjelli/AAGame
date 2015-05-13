@@ -5,6 +5,7 @@ import no.tobkje.aagame.screens.GameScreen;
 import no.tobkje.aagame.tweens.GameObjectTweens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -117,6 +118,9 @@ public abstract class AbstractGameObject implements GameObject {
 
 	@Override
 	public abstract void update(float delta);
+	
+	@Override
+	public abstract void draw(SpriteBatch batch);
 
 	@Override
 	public void move(float delta) {
@@ -157,7 +161,7 @@ public abstract class AbstractGameObject implements GameObject {
 		setOnGround(true);
 		getVelocity().y = 0;
 		getAcceleration().y = 0;
-		// Nudge back over ground
+		// Nudge back over target
 		setY(target.getHitbox().getY()
 				+ target.getHitbox().getHeight() + 1);
 	}

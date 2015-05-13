@@ -65,7 +65,7 @@ public class Man extends AbstractGameObject {
 
 		if (getPosition().y + getHeight() >= AAGame.GAME_HEIGHT) {
 			setY(AAGame.GAME_HEIGHT - getHeight());
-			getVelocity().y = -1;
+			getVelocity().y = Math.min(getVelocity().y, 0);
 
 		}
 
@@ -74,6 +74,7 @@ public class Man extends AbstractGameObject {
 		}
 	}
 
+	
 	public void jetpack() {
 		// Small burst for first jetpack-thrust
 		if (jetpack.getEnergy() == jetpack.getMaxEnergy()) {

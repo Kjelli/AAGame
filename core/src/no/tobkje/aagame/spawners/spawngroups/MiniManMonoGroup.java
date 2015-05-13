@@ -10,8 +10,9 @@ public class MiniManMonoGroup extends AbstractSpawnGroup {
 
 	public MiniManMonoGroup(int size) {
 		super(size);
+		color = (int) (Math.random() * 3);
 	}
-
+	
 	@Override
 	public float getSpawnOffset(int index) {
 		return 50f;
@@ -19,9 +20,7 @@ public class MiniManMonoGroup extends AbstractSpawnGroup {
 
 	@Override
 	protected Baddie newBaddie(int index) {
-		if (color == 0) {
-			color = (int) (Math.random() * 3);
-		}
+
 		switch (color) {
 		case 0:
 			return new MiniManBlue(-1, -1, 0.2f);

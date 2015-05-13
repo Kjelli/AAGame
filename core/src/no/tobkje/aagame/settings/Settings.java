@@ -12,6 +12,10 @@ public class Settings {
 		settings.put(name, val);
 	}
 
+	public static Object get(String name, Object defaultValue) {
+		return settings.containsKey(name) ? settings.get(name) : defaultValue;
+	}
+
 	public static boolean get(String name, boolean defaultValue) {
 		return settings.containsKey(name) ? (boolean) settings.get(name)
 				: defaultValue;
@@ -52,8 +56,4 @@ public class Settings {
 				: defaultValue;
 	}
 
-	public static Object get(String name, Object defaultValue) {
-		return settings.containsKey(name) ? (Object) settings.get(name)
-				: defaultValue;
-	}
 }

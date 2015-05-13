@@ -4,18 +4,18 @@ import no.tobkje.aagame.screens.GameScreen;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-
-public interface Background{
+public interface Background {
 	Layer[] getLayers();
 
-	void update(float delta);
-	void render(SpriteBatch batch);
 	void init();
-	
+
+	void update(float delta);
+
+	void render(SpriteBatch batch);
+
 	GameScreen getParentScreen();
-	
+
 	Color getColor();
 
 	void clear();

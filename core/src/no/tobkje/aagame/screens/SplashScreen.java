@@ -149,10 +149,5 @@ public class SplashScreen extends AbstractGameScreen {
 		});
 	}
 
-	@Override
-	protected void drawOnScreen(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

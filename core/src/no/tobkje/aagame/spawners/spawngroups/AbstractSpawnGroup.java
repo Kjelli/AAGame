@@ -4,14 +4,12 @@ import no.tobkje.aagame.gameobjects.GameObject;
 import no.tobkje.aagame.gameobjects.baddies.Baddie;
 
 public abstract class AbstractSpawnGroup implements SpawnGroup {
-	Baddie[] group;
+	protected final Baddie[] group;
 
 	protected AbstractSpawnGroup(int size) {
 		size = (int) ((Math.random() * 0.5 + 0.5) * size);
 		group = new Baddie[size];
-		for (int i = 0; i < size; i++) {
-			group[i] = newBaddie(i);
-		}
+
 	}
 
 	protected abstract Baddie newBaddie(int index);
@@ -23,6 +21,11 @@ public abstract class AbstractSpawnGroup implements SpawnGroup {
 
 	@Override
 	public GameObject get(int index) {
+		if (group[0] == null) {
+			for (int i = 0; i < getSize(); i++) {
+				group[i] = newBaddie(i);
+			}
+		}
 		return group[index];
 	}
 }

@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractBackground implements Background {
 	private final Layer[] layers;
-	GameScreen parentScreen;
 	private Color color;
+	GameScreen parentScreen;
 
 	public AbstractBackground(int layers) {
 		this.layers = new Layer[layers];
